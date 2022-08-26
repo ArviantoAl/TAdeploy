@@ -10,22 +10,6 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function activity_log(Request $request)
-    {
-        $id_pel = $request->idp;
-        $role = $request->role;
-        $act = $request->activity;
-        $waktu = Carbon::now()->setTimezone('Asia/Jakarta');
-
-        if ($role==3){
-            $activity = new ActivityLog();
-            $activity->pelanggan_id = $id_pel;
-            $activity->action = $act;
-            $activity->waktu = $waktu;
-            $activity->save();
-        }
-    }
-
     public function edit()
     {
         return view('profile.edit');

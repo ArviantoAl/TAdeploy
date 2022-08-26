@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\PelangganExport;
 use App\Helper\LogActivity;
 use App\Mail\MailAdmins;
+use App\Models\Bank;
 use App\Models\Invoice;
 use App\Models\Langganan;
 use App\Models\Langinv;
@@ -269,6 +270,7 @@ class UserController extends Controller
         $status = $user->status->nama_status;
         $invoices = Invoice::query()->where('pelanggan_id', '=', $id_user)->get();
         $langganans = Langganan::query()->where('pelanggan_id', '=', $id_user)->get();
+        $bank = Bank::all();
 
         foreach ($invoices as $invoice){
             $id_inv = $invoice->id_invoice;
@@ -292,6 +294,7 @@ class UserController extends Controller
             'subtotal' => $gettagihan,
             'hargappn' => $hargappn,
             'langganan' => $langganans,
+            'bank' => $bank,
         ];
 //dd($data_ambil);
         return view('dashboard.admin.print.pelanggan', compact('data_ambil'));

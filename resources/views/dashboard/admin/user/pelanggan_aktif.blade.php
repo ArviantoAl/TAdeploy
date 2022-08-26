@@ -63,7 +63,9 @@
                     @if (session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             <strong>{{ session()->get('success') }}</strong>
-                            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"><span aria-hidden="true">&times;</span></button>
+                            <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
                     @endif
                     <div class="table-responsive">

@@ -10,7 +10,7 @@
                     <div class="card-sigin">
                         <!-- Demo content-->
                         <div class="main-card-signin d-md-flex">
-                            <div class="wd-100p"><div class="d-flex mb-4"><a href="index.html"><img src="{{ asset('nowa_assets') }}/img/brand/favicon.png" class="sign-favicon ht-40" alt="logo"></a></div>
+                            <div class="wd-100p"><div class="d-flex mb-4"><a href=""><img src="{{ asset('nowa_assets') }}/img/brand/logo.png" class="sign-favicon ht-80" alt="logo"></a></div>
                                 <div class="">
                                     <div class="main-signup-header">
                                         <h2>Welcome back!</h2>

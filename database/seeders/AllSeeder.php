@@ -210,15 +210,19 @@ class AllSeeder extends Seeder
         $bank = [
             [
                 'nama_bank' => 'BRI',
+                'no_rek' => 375401029446533,
             ],
             [
                 'nama_bank' => 'Mandiri',
+                'no_rek' => 375401029446533,
             ],
             [
                 'nama_bank' => 'BCA',
+                'no_rek' => 375401029446533,
             ],
             [
                 'nama_bank' => 'BSI',
+                'no_rek' => 375401029446533,
             ],
         ];
         DB::table('banks')->insert($bank);

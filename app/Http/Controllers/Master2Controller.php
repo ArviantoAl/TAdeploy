@@ -389,6 +389,7 @@ class Master2Controller extends Controller
     public function post_tambah_bank(Request $request){
         $bank = new Bank();
         $bank->nama_bank = $request->n_bank;
+        $bank->no_rek = $request->norek;
 
         $bank->save();
 
@@ -405,6 +406,7 @@ class Master2Controller extends Controller
     public function post_edit_bank(Request $request ,$id_bank){
         $bank = Bank::query()->find($id_bank);
         $bank->nama_bank = $request->n_bank;
+        $bank->no_rek = $request->norek;
 
         $bank->save();
 

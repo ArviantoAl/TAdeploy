@@ -8393,7 +8393,7 @@
         </div>
         <div class="card-body">
             <div class="row mb-4">
-                <div class="col-sm-6 mb-3">
+                <div class="col-6 mb-3">
                     <h6 class="mb-3">From:</h6>
                     <div>
                         <strong>{{ $data_ambil['cv']['nama_cv'] }}</strong>
@@ -8402,7 +8402,7 @@
                     <div>Email: {{ $data_ambil['cv']['email_cv'] }}</div>
                 </div>
 
-                <div class="col-sm-6 mb-3">
+                <div class="col-6 mb-3">
                     <h6 class="mb-3">To:</h6>
                     <div>
                         <strong>{{ $data_ambil['nama_pelanggan'] }}</strong>
@@ -8438,19 +8438,20 @@
             </div>
             <div class="row">
                 <div class="col-6 ml-auto">
-                    <span>
-                    @if($data_ambil['status']==6)
-                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/belum.jpg" width="50%">
-                        @elseif($data_ambil['status']==7)
-                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/sudah.jpg" width="50%">
-                        @elseif($data_ambil['status']==8)
-                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/lunas.jpg" width="50%">
-                        @elseif($data_ambil['status']==9)
-                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/tidak.jpg" width="50%">
-                        @elseif($data_ambil['status']==11)
-                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/klaim.jpg" width="50%">
-                        @endif
-                    </span>
+                    <table class="table table-clear">
+                        <thead>
+                        <tr>
+                            <strong>Daftar Bank dan Nomor Rekening</strong>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($data_ambil['bank'] as $no => $bank)
+                            <tr>
+                                <td>{{ $bank->nama_bank }}: {{ $bank->no_rek }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
                 <div class="col-6 ml-auto">
                     <table class="table table-clear">
@@ -8483,6 +8484,19 @@
                         </tr>
                         </tbody>
                     </table>
+                    <span>
+                    @if($data_ambil['status']==6)
+                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/belum.jpg" width="50%">
+                        @elseif($data_ambil['status']==7)
+                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/sudah.jpg" width="50%">
+                        @elseif($data_ambil['status']==8)
+                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/lunas.jpg" width="50%">
+                        @elseif($data_ambil['status']==9)
+                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/tidak.jpg" width="50%">
+                        @elseif($data_ambil['status']==11)
+                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/klaim.jpg" width="50%">
+                        @endif
+                    </span>
                 </div>
             </div>
 

@@ -39,6 +39,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama Bank</th>
+                                <th>Nomor Rekening</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
@@ -47,6 +48,7 @@
                                 <tr>
                                     <td>{{ $no+1 }}</td>
                                     <td>{{ $b->nama_bank }}</td>
+                                    <td>{{ $b->no_rek }}</td>
                                     <td>
                                         <a class="btn btn-warning" href="{{ route('admin.editbank', $b->id_bank) }}" data-toggle="tooltip" title="Edit">
                                             <i class="fa fa-edit"></i>

@@ -30,6 +30,10 @@
                         <label for="n_bank" class="form-label">Nama Bank</label>
                         <input class="form-control" id="n_bank" name="n_bank" placeholder="Masukkan Nama Bank" type="text" required autocomplete="n_bank" autofocus>
                     </div>
+                    <div class="form-group">
+                        <label for="norek" class="form-label">Nomor Rekening</label>
+                        <input class="form-control" id="norek" name="norek" placeholder="ex. 375401029446533" type="number" required autocomplete="norek" autofocus>
+                    </div>
                     <button type="submit" class="btn btn-primary mt-3 mb-0">Create</button>
                 </form>
             </div>

@@ -28,7 +28,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
                             <path d="M18,15H16V17H18M18,11H16V13H18M20,19H12V17H14V15H12V13H14V11H12V9H20M10,7H8V5H10M10,11H8V9H10M10,15H8V13H10M10,19H8V17H10M6,7H4V5H6M6,11H4V9H6M6,15H4V13H6M6,19H4V17H6M12,7V3H2V21H22V7H12Z"/>
                         </svg>
-                        <span class="side-menu__label">Profil CV</span>
+                        <span class="side-menu__label">Profil</span>
                     </a>
                 </li>
                 <li class="slide{{ ($titlePage == 'Daftar PPN'|| $titlePage == 'Edit PPN' || $titlePage == 'Tambah PPN') ? ' is-expanded' : '' }}">
@@ -90,7 +90,7 @@
                     </a>
                 </li>
                 <li class="slide{{ ($titlePage == 'Daftar Jenis BTS'|| $titlePage == 'Edit Jenis BTS' || $titlePage == 'Tambah Jenis BTS') ? ' is-expanded' : '' }}">
-                    <a class="side-menu__item{{ ($titlePage == 'Daftar Jenis BTS'|| $titlePage == 'Edit Jenis BTS' || $titlePage == 'Tambah Jenis BTS') ? ' active' : '' }}" href="{{route('admin.frek')}}">
+                    <a class="side-menu__item{{ ($titlePage == 'Daftar Jenis BTS'|| $titlePage == 'Edit Jenis BTS' || $titlePage == 'Tambah Jenis BTS') ? ' active' : '' }}" href="{{route('admin.jenis')}}">
                         <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 -64 640 640">
                             <path d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"/>
                         </svg>

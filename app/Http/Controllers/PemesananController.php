@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\MailAdmins;
 use App\Mail\Invoice as Invoices;
+use App\Models\Bank;
 use App\Models\Bts;
 use App\Models\District;
 use App\Models\Invoice;
@@ -44,6 +45,7 @@ class PemesananController extends Controller
             'username' => 'required',
             'email' => 'required',
         ]);
+        $bank = Bank::all();
         $name = $request->name;
         $username = $request->username;
         $password = Hash::make($username);
@@ -263,6 +265,7 @@ class PemesananController extends Controller
 
 //            $cv = ProfilCv::query()->find(1);
 //            $data_ambil = [
+//                'status' => 6,
 //                'email_cv' => $cv->email_cv,
 //                'nama_cv' => $cv->nama_cv,
 //                'alamat' => $cv->alamat,
@@ -278,6 +281,7 @@ class PemesananController extends Controller
 //                'subtotal' => $harga,
 //                'ppn' => $getppn2,
 //                'hargappn' => $hargappn,
+//                'bank' => $bank,
 //            ];
 //
 //            Mail::to($email)->send(new Invoices($data_ambil));
@@ -297,6 +301,7 @@ class PemesananController extends Controller
     }
 
     public function pelanggan_lama(Request $request){
+        $bank = Bank::all();
         $layanan_id = $request->layanan;
         $provinsi_id = $request->provinsi;
         $kabupaten_id = $request->kabupaten;
@@ -468,6 +473,7 @@ class PemesananController extends Controller
 
 //                $cv = ProfilCv::query()->find(1);
 //                $data_ambil = [
+//                    'status' => 6,
 //                    'email_cv' => $cv->email_cv,
 //                    'nama_cv' => $cv->nama_cv,
 //                    'alamat' => $cv->alamat,
@@ -483,6 +489,7 @@ class PemesananController extends Controller
 //                    'subtotal' => $harga,
 //                    'ppn' => $getppn2,
 //                    'hargappn' => $hargappn,
+//                    'bank' => $bank,
 //                ];
 //
 //                Mail::to($email)->send(new Invoices($data_ambil));
@@ -534,6 +541,7 @@ class PemesananController extends Controller
 
 //                $cv = ProfilCv::query()->find(1);
 //                $data_ambil = [
+//                    'status' => 6,
 //                    'email_cv' => $cv->email_cv,
 //                    'nama_cv' => $cv->nama_cv,
 //                    'alamat' => $cv->alamat,
@@ -549,6 +557,7 @@ class PemesananController extends Controller
 //                    'subtotal' => $gettagihan,
 //                    'ppn' => $getppn2,
 //                    'hargappn' => $hargappn2,
+//                    'bank' => $bank,
 //                ];
 //
 //                Mail::to($email)->send(new Invoices($data_ambil));
@@ -616,6 +625,7 @@ class PemesananController extends Controller
     }
 
     public function post_setujui_pesan(Request $request){
+        $bank = Bank::all();
         $flag_ppn = $request->ppn;
         $layanan_id = $request->layanan;
         $provinsi_id = $request->provinsi;
@@ -807,6 +817,7 @@ class PemesananController extends Controller
 
 //            $cv = ProfilCv::query()->find(1);
 //            $data_ambil = [
+//                'status' => 6,
 //                'email_cv' => $cv->email_cv,
 //                'nama_cv' => $cv->nama_cv,
 //                'alamat' => $cv->alamat,
@@ -822,6 +833,7 @@ class PemesananController extends Controller
 //                'subtotal' => $harga,
 //                'ppn' => $getppn2,
 //                'hargappn' => $hargappn,
+//                'bank' => $bank,
 //            ];
 //
 //            Mail::to($email)->send(new Invoices($data_ambil));

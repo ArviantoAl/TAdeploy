@@ -84,6 +84,7 @@ class MasterController extends Controller
             ->where('status_id','=',2)
             ->orWhere('status_id','=',3)
             ->orWhere('status_id','=',11)
+            ->orWhere('status_id','=',10)
             ->get();
         $lang = [];
         $master = [];
@@ -96,7 +97,7 @@ class MasterController extends Controller
             ];
         }
         foreach ($data as $d){
-            if ($d->status_id==2){
+            if ($d->status_id==2||$d->status_id==10){
                 $lang[] = [
                     'nama' => $d->pelanggan->name,
                     'status' => 'Aktif(proses pembayaran)',
