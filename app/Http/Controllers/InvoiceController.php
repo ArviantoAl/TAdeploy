@@ -99,6 +99,7 @@ class InvoiceController extends Controller
     public function kirim_balik(Request $request){
         $bulans=Carbon::now()->format('n');
         $tahun=Carbon::now()->format('Y');
+        $bank = Bank::all();
         $tgl_tempo=$request->tempo;
 
         $datas = Langganan::query()
@@ -232,6 +233,7 @@ class InvoiceController extends Controller
 //                'subtotal' => $gettagihan,
 //                'ppn' => $getppn2,
 //                'hargappn' => $hargappn2,
+//                'bank' => $bank,
 //            ];
 //            $datas2 = Langganan::query()
 //                ->where('status_id', '=', 3)
@@ -486,6 +488,7 @@ class InvoiceController extends Controller
     }
 
     public function print_invoice($id_invoice){
+        $bank = Bank::all();
         $invoice = Invoices::find($id_invoice);
         $status = $invoice->status_id;
         $ppn = $invoice->ppn;
@@ -527,7 +530,8 @@ class InvoiceController extends Controller
             'subtotal' => $gettagihan,
             'hargappn' => $hargappn,
             'langganans' => $langganans,
-            'ppn' => $ppn
+            'ppn' => $ppn,
+            'bank' => $bank
         ];
 
         if (auth()->user()->user_role==1){

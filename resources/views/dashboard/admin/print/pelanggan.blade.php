@@ -8447,7 +8447,23 @@
                     </table>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-sm-5 ml-auto">
+                    <div class="col-6 ml-auto">
+                        <table class="table table-clear">
+                            <thead>
+                            <tr>
+                                <strong>Daftar Bank dan Nomor Rekening</strong>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($data_ambil['bank'] as $no => $bank)
+                                <tr>
+                                    <td>{{ $bank->nama_bank }}: {{ $bank->no_rek }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-6 ml-auto">
                         <table class="table table-clear">
                             <tbody>
                             <tr>

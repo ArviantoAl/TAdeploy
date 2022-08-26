@@ -8393,7 +8393,7 @@
         </div>
         <div class="card-body">
             <div class="row mb-4">
-                <div class="col-sm-6">
+                <div class="col-6">
                     <h6 class="mb-3">From:</h6>
                     <div>
                         <strong>{{ $data_ambil['nama_cv'] }}</strong>
@@ -8403,7 +8403,7 @@
                     <div>Phone: {{ $data_ambil['no_hp'] }}</div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-6">
                     <h6 class="mb-3">To:</h6>
                     <div>
                         <strong>{{ $data_ambil['nama_pelanggan'] }}</strong>
@@ -8442,27 +8442,45 @@
                 </table>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-sm-5 ml-auto">
+                <div class="col-6 ml-auto">
+                    <table class="table table-clear">
+                        <thead>
+                        <tr>
+                            <strong>Daftar Bank dan Nomor Rekening</strong>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach ($data_ambil['bank'] as $no => $bank)
+                            <tr>
+                                <td>{{ $bank->nama_bank }}: {{ $bank->no_rek }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-6 ml-auto">
                     <table class="table table-clear">
                         <tbody>
                         <tr>
-                            <td class="left">
+                            <td class="float-right">
                                 <strong>Sub Total</strong>
                             </td>
                             <td>
                                 <div>{{ rupiah($data_ambil['subtotal']) }}</div>
                             </td>
                         </tr>
+                        @if ($data_ambil['ppn']!=0)
+                            <tr>
+                                <td class="float-right">
+                                    <strong>PPN {{ $data_ambil['ppn'] }}%</strong>
+                                </td>
+                                <td>
+                                    <div>{{ rupiah($data_ambil['hargappn']) }}</div>
+                                </td>
+                            </tr>
+                        @endif
                         <tr>
-                            <td class="left">
-                                <strong>PPN {{ $data_ambil['ppn'] }}%</strong>
-                            </td>
-                            <td>
-                                <div>{{ rupiah($data_ambil['hargappn']) }}</div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="left">
+                            <td class="float-right">
                                 <strong>Total Tagihan</strong>
                             </td>
                             <td>
@@ -8471,6 +8489,19 @@
                         </tr>
                         </tbody>
                     </table>
+                    <span>
+                    @if($data_ambil['status']==6)
+                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/belum.jpg" width="50%">
+                        @elseif($data_ambil['status']==7)
+                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/sudah.jpg" width="50%">
+                        @elseif($data_ambil['status']==8)
+                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/lunas.jpg" width="50%">
+                        @elseif($data_ambil['status']==9)
+                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/tidak.jpg" width="50%">
+                        @elseif($data_ambil['status']==11)
+                            <img class="float-right" src="{{ asset('nowa_assets') }}/img/klaim.jpg" width="50%">
+                        @endif
+                    </span>
                 </div>
             </div>
 

@@ -6,12 +6,12 @@
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
-            <span class="main-content-title mg-b-0 mg-b-lg-1">Profil CV</span>
+            <span class="main-content-title mg-b-0 mg-b-lg-1">Profil</span>
         </div>
         <div class="justify-content-center mt-2">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item tx-15"><a href="javascript:void(0);">Data Profil CV</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Profil CV</li>
+                <li class="breadcrumb-item tx-15"><a href="javascript:void(0);">Data Profil</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Profil</li>
             </ol>
         </div>
     </div>
@@ -22,12 +22,12 @@
             <div class="row">
                 <div class="btn-group ms-2 mt-2 mb-2">
                     <a style="color: white" class="btn btn-success" href="{{route('admin.editcv',1)}}">
-                        {{ __('Edit Profil CV') }}
+                        {{ __('Edit Profil') }}
                     </a>
                 </div>
                 <div class="btn-group mt-2 mb-2">
                     <a style="color: white" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#logo">
-                        {{__('Edit Logo dan Ikon Profil CV')}}
+                        {{__('Edit Logo dan Ikon Profil')}}
                     </a>
                 </div>
             </div>

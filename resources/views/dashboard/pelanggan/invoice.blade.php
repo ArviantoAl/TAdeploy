@@ -146,7 +146,7 @@
 @section('modal')
     @foreach($invoices as $no => $invoice)
         <div class="modal" id="myModal{{$invoice->id_invoice}}">
-            <div class="modal-dialog modal-xl">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
 
                     <!-- Modal Header -->
