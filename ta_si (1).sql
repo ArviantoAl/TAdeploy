@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 19 Agu 2022 pada 04.24
--- Versi server: 10.4.19-MariaDB
--- Versi PHP: 8.0.7
+-- Host: localhost
+-- Generation Time: Nov 01, 2022 at 02:08 PM
+-- Server version: 10.2.40-MariaDB
+-- PHP Version: 7.2.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ta_si`
+-- Database: `m3119060_gmp`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `activitylogs`
+-- Table structure for table `activitylogs`
 --
 
 CREATE TABLE `activitylogs` (
@@ -40,33 +40,45 @@ CREATE TABLE `activitylogs` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `activitylogs`
+--
+
+INSERT INTO `activitylogs` (`id_activity`, `subject`, `url`, `method`, `ip`, `waktu`, `agent`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'Pelanggan, Login', 'http://m3119060.mhs.d3tiuns.com/gmp/login', 'POST', '36.72.214.68', '2022-08-25 10:37:46', NULL, 2, '2022-08-25 03:37:46', '2022-08-25 03:37:46'),
+(2, 'Pelanggan, Dashboard', 'http://m3119060.mhs.d3tiuns.com/gmp/pelanggan/dashboard', 'GET', '36.72.212.50', '2022-08-25 10:37:46', NULL, 2, '2022-08-25 03:37:46', '2022-08-25 03:37:46'),
+(3, 'Pelanggan, Daftar Invoice', 'http://m3119060.mhs.d3tiuns.com/gmp/pelanggan/data_invoice', 'GET', '36.72.215.78', '2022-08-25 10:38:50', NULL, 2, '2022-08-25 03:38:50', '2022-08-25 03:38:50'),
+(4, 'Pelanggan, Logout', 'http://m3119060.mhs.d3tiuns.com/gmp/logout', 'POST', '36.72.214.68', '2022-08-25 11:05:53', NULL, 2, '2022-08-25 04:05:53', '2022-08-25 04:05:53');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `banks`
+-- Table structure for table `banks`
 --
 
 CREATE TABLE `banks` (
   `id_bank` int(10) UNSIGNED NOT NULL,
   `nama_bank` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no_rek` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `banks`
+-- Dumping data for table `banks`
 --
 
-INSERT INTO `banks` (`id_bank`, `nama_bank`, `created_at`, `updated_at`) VALUES
-(1, 'BRI', NULL, NULL),
-(2, 'Mandiri', NULL, NULL),
-(3, 'BCA', NULL, NULL),
-(4, 'BSI', NULL, NULL);
+INSERT INTO `banks` (`id_bank`, `nama_bank`, `no_rek`, `created_at`, `updated_at`) VALUES
+(1, 'BRI', '375401029446533', NULL, NULL),
+(2, 'Mandiri', '375401029446533', NULL, NULL),
+(3, 'BCA', '375401029446533', NULL, NULL),
+(4, 'BSI', '375401029446533', NULL, NULL),
+(5, 'BTN', '45564345667', '2022-08-21 11:00:04', '2022-08-21 11:01:31');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bts`
+-- Table structure for table `bts`
 --
 
 CREATE TABLE `bts` (
@@ -84,7 +96,7 @@ CREATE TABLE `bts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `bts`
+-- Dumping data for table `bts`
 --
 
 INSERT INTO `bts` (`id_bts`, `nama_bts`, `kategori_id`, `jenis_id`, `lokasi_id`, `frekuensi`, `ssid`, `ip`, `status_id`, `created_at`, `updated_at`) VALUES
@@ -93,7 +105,7 @@ INSERT INTO `bts` (`id_bts`, `nama_bts`, `kategori_id`, `jenis_id`, `lokasi_id`,
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `districts`
+-- Table structure for table `districts`
 --
 
 CREATE TABLE `districts` (
@@ -103,7 +115,7 @@ CREATE TABLE `districts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `districts`
+-- Dumping data for table `districts`
 --
 
 INSERT INTO `districts` (`id`, `regency_id`, `name`) VALUES
@@ -7330,7 +7342,7 @@ INSERT INTO `districts` (`id`, `regency_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -7346,7 +7358,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `invoices`
+-- Table structure for table `invoices`
 --
 
 CREATE TABLE `invoices` (
@@ -7369,10 +7381,17 @@ CREATE TABLE `invoices` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `invoices`
+--
+
+INSERT INTO `invoices` (`id_invoice`, `pelanggan_id`, `metode_id`, `keterangan`, `bank_id`, `tgl_terbit`, `tgl_tempo`, `tgl_bayar`, `harga_bayar`, `tagihan`, `bulan`, `tahun`, `ppn`, `status_id`, `bukti_bayar`, `created_at`, `updated_at`) VALUES
+('INV3222082022', 2, NULL, NULL, NULL, '2022-08-21 18:09:44', '2022-08-28 18:09:44', NULL, 222000, 222000, 8, 2022, 11, 6, NULL, '2022-08-21 11:09:44', '2022-08-21 11:09:44');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_bts`
+-- Table structure for table `jenis_bts`
 --
 
 CREATE TABLE `jenis_bts` (
@@ -7383,7 +7402,7 @@ CREATE TABLE `jenis_bts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `jenis_bts`
+-- Dumping data for table `jenis_bts`
 --
 
 INSERT INTO `jenis_bts` (`id_jenis`, `nama_perangkat`, `created_at`, `updated_at`) VALUES
@@ -7394,7 +7413,7 @@ INSERT INTO `jenis_bts` (`id_jenis`, `nama_perangkat`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategoris`
+-- Table structure for table `kategoris`
 --
 
 CREATE TABLE `kategoris` (
@@ -7406,7 +7425,7 @@ CREATE TABLE `kategoris` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `kategoris`
+-- Dumping data for table `kategoris`
 --
 
 INSERT INTO `kategoris` (`id_kategori`, `kategori_frekuensi`, `created_at`, `updated_at`, `deleted_at`) VALUES
@@ -7416,7 +7435,7 @@ INSERT INTO `kategoris` (`id_kategori`, `kategori_frekuensi`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `langganans`
+-- Table structure for table `langganans`
 --
 
 CREATE TABLE `langganans` (
@@ -7444,10 +7463,17 @@ CREATE TABLE `langganans` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `langganans`
+--
+
+INSERT INTO `langganans` (`id_langganan`, `pelanggan_id`, `layanan_id`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `desa_id`, `detail_alamat`, `rt`, `rw`, `alamat_pasang`, `latitude`, `longitude`, `status_id`, `tgl_aktif`, `tgl_lanjut`, `bts_id`, `turunan_id`, `ip`, `ip_radio`, `created_at`, `updated_at`) VALUES
+(1, 2, 2, '14', '1402', '1402011', '1402011002', 'jalan', NULL, NULL, 'RT 4 / RW 5, jalan, PEMATANG, BATANG PERANAP, KABUPATEN INDRAGIRI HULU, RIAU', '-7.324372', '110.675986', 2, NULL, NULL, 1, NULL, '1', '2', '2022-08-21 11:09:44', '2022-08-21 11:09:44');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `langganan_invoices`
+-- Table structure for table `langganan_invoices`
 --
 
 CREATE TABLE `langganan_invoices` (
@@ -7462,10 +7488,17 @@ CREATE TABLE `langganan_invoices` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `langganan_invoices`
+--
+
+INSERT INTO `langganan_invoices` (`id`, `invoice_id`, `pelanggan_id`, `layanan_id`, `langganan_id`, `harga_satuan`, `status_id`, `created_at`, `updated_at`) VALUES
+(1, 'INV3222082022', 2, 2, 1, 200000, 6, '2022-08-21 11:09:44', '2022-08-21 11:09:44');
+
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `layanans`
+-- Table structure for table `layanans`
 --
 
 CREATE TABLE `layanans` (
@@ -7478,7 +7511,7 @@ CREATE TABLE `layanans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `layanans`
+-- Dumping data for table `layanans`
 --
 
 INSERT INTO `layanans` (`id_layanan`, `nama_layanan`, `harga`, `status_id`, `created_at`, `updated_at`) VALUES
@@ -7489,7 +7522,7 @@ INSERT INTO `layanans` (`id_layanan`, `nama_layanan`, `harga`, `status_id`, `cre
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `master_bts`
+-- Table structure for table `master_bts`
 --
 
 CREATE TABLE `master_bts` (
@@ -7507,16 +7540,16 @@ CREATE TABLE `master_bts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `master_bts`
+-- Dumping data for table `master_bts`
 --
 
 INSERT INTO `master_bts` (`id_master`, `nama_master`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `desa_id`, `nama_lokasi`, `latitude`, `longitude`, `created_at`, `updated_at`) VALUES
-(1, 'BTS Jumapolo 1', '33', '3313', '3313030', '3313030001', 'PASEBAN, JUMAPOLO, KABUPATEN KARANGANYAR, JAWA TENGAH', '-7.724714', '110.956403', NULL, NULL);
+(1, 'BTS Jumapolo 1', '33', '3313', '3313030', '3313030001', 'PASEBAN, JUMAPOLO, KABUPATEN KARANGANYAR, JAWA TENGAH', '-7.7039697', '110.9757218', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `metodes`
+-- Table structure for table `metodes`
 --
 
 CREATE TABLE `metodes` (
@@ -7527,7 +7560,7 @@ CREATE TABLE `metodes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `metodes`
+-- Dumping data for table `metodes`
 --
 
 INSERT INTO `metodes` (`id_metode`, `nama_metode`, `created_at`, `updated_at`) VALUES
@@ -7537,7 +7570,7 @@ INSERT INTO `metodes` (`id_metode`, `nama_metode`, `created_at`, `updated_at`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -7547,40 +7580,40 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(647, '2014_10_12_100000_create_password_resets_table', 1),
-(648, '2017_05_02_140432_create_provinces_tables', 1),
-(649, '2017_05_02_140444_create_regencies_tables', 1),
-(650, '2017_05_02_142019_create_districts_tables', 1),
-(651, '2017_05_02_143454_create_villages_tables', 1),
-(652, '2019_08_19_000000_create_failed_jobs_table', 1),
-(653, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(654, '2022_03_31_035204_create_roles_table', 1),
-(655, '2022_07_11_091712_create_status_table', 1),
-(656, '2022_07_11_093253_create_users_table', 1),
-(657, '2022_07_11_093525_create_kategoris_table', 1),
-(658, '2022_07_11_093612_create_jenis_bts_table', 1),
-(659, '2022_07_12_165943_create_master_bts_table', 1),
-(660, '2022_07_13_132826_create_bts_table', 1),
-(661, '2022_07_13_133153_create_turunan_bts_table', 1),
-(662, '2022_07_13_133304_create_layanans_table', 1),
-(663, '2022_07_13_133359_create_langganans_table', 1),
-(664, '2022_07_13_133637_create_perangkat_bts_table', 1),
-(665, '2022_07_13_133726_create_profilcv_table', 1),
-(666, '2022_07_15_131947_create_ppn_table', 1),
-(667, '2022_08_04_045140_create_metodes_table', 1),
-(668, '2022_08_04_045502_create_banks_table', 1),
-(669, '2022_08_04_045623_create_invoices_table', 1),
-(670, '2022_08_04_045745_create_langganan_invoices_table', 1),
-(671, '2022_08_07_064142_create_activitylogs_table', 1);
+(722, '2014_10_12_100000_create_password_resets_table', 1),
+(723, '2017_05_02_140432_create_provinces_tables', 1),
+(724, '2017_05_02_140444_create_regencies_tables', 1),
+(725, '2017_05_02_142019_create_districts_tables', 1),
+(726, '2017_05_02_143454_create_villages_tables', 1),
+(727, '2019_08_19_000000_create_failed_jobs_table', 1),
+(728, '2019_12_14_000001_create_personal_access_tokens_table', 1),
+(729, '2022_03_31_035204_create_roles_table', 1),
+(730, '2022_07_11_091712_create_status_table', 1),
+(731, '2022_07_11_093253_create_users_table', 1),
+(732, '2022_07_11_093525_create_kategoris_table', 1),
+(733, '2022_07_11_093612_create_jenis_bts_table', 1),
+(734, '2022_07_12_165943_create_master_bts_table', 1),
+(735, '2022_07_13_132826_create_bts_table', 1),
+(736, '2022_07_13_133153_create_turunan_bts_table', 1),
+(737, '2022_07_13_133304_create_layanans_table', 1),
+(738, '2022_07_13_133359_create_langganans_table', 1),
+(739, '2022_07_13_133637_create_perangkat_bts_table', 1),
+(740, '2022_07_13_133726_create_profilcv_table', 1),
+(741, '2022_07_15_131947_create_ppn_table', 1),
+(742, '2022_08_04_045140_create_metodes_table', 1),
+(743, '2022_08_04_045502_create_banks_table', 1),
+(744, '2022_08_04_045623_create_invoices_table', 1),
+(745, '2022_08_04_045745_create_langganan_invoices_table', 1),
+(746, '2022_08_07_064142_create_activitylogs_table', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -7592,7 +7625,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `perangkat_bts`
+-- Table structure for table `perangkat_bts`
 --
 
 CREATE TABLE `perangkat_bts` (
@@ -7606,7 +7639,7 @@ CREATE TABLE `perangkat_bts` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `personal_access_tokens`
+-- Table structure for table `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -7624,7 +7657,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ppn`
+-- Table structure for table `ppn`
 --
 
 CREATE TABLE `ppn` (
@@ -7636,7 +7669,7 @@ CREATE TABLE `ppn` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `ppn`
+-- Dumping data for table `ppn`
 --
 
 INSERT INTO `ppn` (`id_ppn`, `tahun`, `jumlah`, `created_at`, `updated_at`) VALUES
@@ -7645,7 +7678,7 @@ INSERT INTO `ppn` (`id_ppn`, `tahun`, `jumlah`, `created_at`, `updated_at`) VALU
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `profilcv`
+-- Table structure for table `profilcv`
 --
 
 CREATE TABLE `profilcv` (
@@ -7670,16 +7703,16 @@ CREATE TABLE `profilcv` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `profilcv`
+-- Dumping data for table `profilcv`
 --
 
 INSERT INTO `profilcv` (`id_profil`, `nama_cv`, `email_cv`, `web_cv`, `no_hp`, `provinsi_id`, `kabupaten_id`, `kecamatan_id`, `desa_id`, `detail_alamat`, `rt`, `rw`, `alamat`, `latitude`, `longitude`, `terakhir_generate`, `created_at`, `updated_at`) VALUES
-(1, 'CV Gudang Media Perkasa', 'info@gudangtechno.web.id', 'info@gudangtechno.web.id', '081804411569', '33', '3313', '3313030', '3313030001', 'Dusun Gudang', '1', '7', 'RT 1 / RW 7, Dusun Gudang, PASEBAN, JUMAPOLO, KABUPATEN KARANGANYAR, JAWA TENGAH', '-7.7246776', '110.9562274', 7, NULL, NULL);
+(1, 'CV Gudang Media Perkasa', 'info@gudangtechno.web.id', 'info@gudangtechno.web.id', '081804411569', '33', '3313', '3313030', '3313030001', 'Dusun Gudang', '1', '7', 'RT 1 / RW 7, Dusun Gudang, PASEBAN, JUMAPOLO, KABUPATEN KARANGANYAR, JAWA TENGAH', '-7.7246776', '110.9562274', 8, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `provinces`
+-- Table structure for table `provinces`
 --
 
 CREATE TABLE `provinces` (
@@ -7688,7 +7721,7 @@ CREATE TABLE `provinces` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `provinces`
+-- Dumping data for table `provinces`
 --
 
 INSERT INTO `provinces` (`id`, `name`) VALUES
@@ -7730,7 +7763,7 @@ INSERT INTO `provinces` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `regencies`
+-- Table structure for table `regencies`
 --
 
 CREATE TABLE `regencies` (
@@ -7740,7 +7773,7 @@ CREATE TABLE `regencies` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `regencies`
+-- Dumping data for table `regencies`
 --
 
 INSERT INTO `regencies` (`id`, `province_id`, `name`) VALUES
@@ -8262,7 +8295,7 @@ INSERT INTO `regencies` (`id`, `province_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -8273,7 +8306,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id_role`, `nama_role`, `created_at`, `updated_at`) VALUES
@@ -8284,7 +8317,7 @@ INSERT INTO `roles` (`id_role`, `nama_role`, `created_at`, `updated_at`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `status`
+-- Table structure for table `status`
 --
 
 CREATE TABLE `status` (
@@ -8296,7 +8329,7 @@ CREATE TABLE `status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `status`
+-- Dumping data for table `status`
 --
 
 INSERT INTO `status` (`id_status`, `kategori_tabel`, `nama_status`, `created_at`, `updated_at`) VALUES
@@ -8315,7 +8348,7 @@ INSERT INTO `status` (`id_status`, `kategori_tabel`, `nama_status`, `created_at`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `turunan_bts`
+-- Table structure for table `turunan_bts`
 --
 
 CREATE TABLE `turunan_bts` (
@@ -8342,7 +8375,7 @@ CREATE TABLE `turunan_bts` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -8362,16 +8395,17 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id_user`, `name`, `email`, `email_verified_at`, `username`, `password`, `user_role`, `status_id`, `ppn`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'admin gudang media perkasa', 'triasrano@gmail.com', '2022-08-18 19:21:29', 'admingmp', '$2y$10$iDcGxtRb5WZfwHol/lPskeGJJeU0tZCa.91rct0kkZd2HYUSzuNsS', 1, 3, '0', NULL, '2022-08-18 19:21:29', NULL, NULL);
+(1, 'admin gudang media perkasa', 'triasrano@gmail.com', '2022-08-21 10:54:30', 'admingmp', '$2y$10$1zIGWlopvY4V5Dbg4wXS2.vWdOUVZV9VZOpD234tnJXnqqn6JsTqe', 1, 3, '0', NULL, '2022-08-21 10:54:30', NULL, NULL),
+(2, 'pane', 'triaspane@gmail.com', NULL, '0819767654443', '$2y$10$B4eFdrnEa/E6oQB9AZv.E.vV7JqxLvCqrb.iSouJGfwwTquRv6cfK', 3, 2, '1', NULL, '2022-08-21 11:09:43', '2022-08-21 11:09:43', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `villages`
+-- Table structure for table `villages`
 --
 
 CREATE TABLE `villages` (
@@ -8381,7 +8415,7 @@ CREATE TABLE `villages` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `villages`
+-- Dumping data for table `villages`
 --
 
 INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
@@ -88987,19 +89021,19 @@ INSERT INTO `villages` (`id`, `district_id`, `name`) VALUES
 --
 
 --
--- Indeks untuk tabel `activitylogs`
+-- Indexes for table `activitylogs`
 --
 ALTER TABLE `activitylogs`
   ADD PRIMARY KEY (`id_activity`);
 
 --
--- Indeks untuk tabel `banks`
+-- Indexes for table `banks`
 --
 ALTER TABLE `banks`
   ADD PRIMARY KEY (`id_bank`);
 
 --
--- Indeks untuk tabel `bts`
+-- Indexes for table `bts`
 --
 ALTER TABLE `bts`
   ADD PRIMARY KEY (`id_bts`),
@@ -89009,21 +89043,21 @@ ALTER TABLE `bts`
   ADD KEY `bts_status_id_foreign` (`status_id`);
 
 --
--- Indeks untuk tabel `districts`
+-- Indexes for table `districts`
 --
 ALTER TABLE `districts`
   ADD KEY `districts_regency_id_foreign` (`regency_id`),
   ADD KEY `districts_id_index` (`id`);
 
 --
--- Indeks untuk tabel `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indeks untuk tabel `invoices`
+-- Indexes for table `invoices`
 --
 ALTER TABLE `invoices`
   ADD PRIMARY KEY (`id_invoice`),
@@ -89033,19 +89067,19 @@ ALTER TABLE `invoices`
   ADD KEY `invoices_status_id_foreign` (`status_id`);
 
 --
--- Indeks untuk tabel `jenis_bts`
+-- Indexes for table `jenis_bts`
 --
 ALTER TABLE `jenis_bts`
   ADD PRIMARY KEY (`id_jenis`);
 
 --
--- Indeks untuk tabel `kategoris`
+-- Indexes for table `kategoris`
 --
 ALTER TABLE `kategoris`
   ADD PRIMARY KEY (`id_kategori`);
 
 --
--- Indeks untuk tabel `langganans`
+-- Indexes for table `langganans`
 --
 ALTER TABLE `langganans`
   ADD PRIMARY KEY (`id_langganan`),
@@ -89060,7 +89094,7 @@ ALTER TABLE `langganans`
   ADD KEY `langganans_turunan_id_foreign` (`turunan_id`);
 
 --
--- Indeks untuk tabel `langganan_invoices`
+-- Indexes for table `langganan_invoices`
 --
 ALTER TABLE `langganan_invoices`
   ADD PRIMARY KEY (`id`),
@@ -89071,14 +89105,14 @@ ALTER TABLE `langganan_invoices`
   ADD KEY `langganan_invoices_status_id_foreign` (`status_id`);
 
 --
--- Indeks untuk tabel `layanans`
+-- Indexes for table `layanans`
 --
 ALTER TABLE `layanans`
   ADD PRIMARY KEY (`id_layanan`),
   ADD KEY `layanans_status_id_foreign` (`status_id`);
 
 --
--- Indeks untuk tabel `master_bts`
+-- Indexes for table `master_bts`
 --
 ALTER TABLE `master_bts`
   ADD PRIMARY KEY (`id_master`),
@@ -89088,32 +89122,32 @@ ALTER TABLE `master_bts`
   ADD KEY `master_bts_desa_id_foreign` (`desa_id`);
 
 --
--- Indeks untuk tabel `metodes`
+-- Indexes for table `metodes`
 --
 ALTER TABLE `metodes`
   ADD PRIMARY KEY (`id_metode`);
 
 --
--- Indeks untuk tabel `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indeks untuk tabel `perangkat_bts`
+-- Indexes for table `perangkat_bts`
 --
 ALTER TABLE `perangkat_bts`
   ADD PRIMARY KEY (`id_perangkat_bts`),
   ADD KEY `perangkat_bts_bts_id_foreign` (`bts_id`);
 
 --
--- Indeks untuk tabel `personal_access_tokens`
+-- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -89121,13 +89155,13 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Indeks untuk tabel `ppn`
+-- Indexes for table `ppn`
 --
 ALTER TABLE `ppn`
   ADD PRIMARY KEY (`id_ppn`);
 
 --
--- Indeks untuk tabel `profilcv`
+-- Indexes for table `profilcv`
 --
 ALTER TABLE `profilcv`
   ADD PRIMARY KEY (`id_profil`),
@@ -89137,32 +89171,32 @@ ALTER TABLE `profilcv`
   ADD KEY `profilcv_desa_id_foreign` (`desa_id`);
 
 --
--- Indeks untuk tabel `provinces`
+-- Indexes for table `provinces`
 --
 ALTER TABLE `provinces`
   ADD KEY `provinces_id_index` (`id`);
 
 --
--- Indeks untuk tabel `regencies`
+-- Indexes for table `regencies`
 --
 ALTER TABLE `regencies`
   ADD KEY `regencies_province_id_foreign` (`province_id`),
   ADD KEY `regencies_id_index` (`id`);
 
 --
--- Indeks untuk tabel `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id_role`);
 
 --
--- Indeks untuk tabel `status`
+-- Indexes for table `status`
 --
 ALTER TABLE `status`
   ADD PRIMARY KEY (`id_status`);
 
 --
--- Indeks untuk tabel `turunan_bts`
+-- Indexes for table `turunan_bts`
 --
 ALTER TABLE `turunan_bts`
   ADD PRIMARY KEY (`id_turunan`),
@@ -89174,7 +89208,7 @@ ALTER TABLE `turunan_bts`
   ADD KEY `turunan_bts_status_id_foreign` (`status_id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`),
@@ -89184,142 +89218,142 @@ ALTER TABLE `users`
   ADD KEY `users_status_id_foreign` (`status_id`);
 
 --
--- Indeks untuk tabel `villages`
+-- Indexes for table `villages`
 --
 ALTER TABLE `villages`
   ADD KEY `villages_district_id_foreign` (`district_id`),
   ADD KEY `villages_id_index` (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `activitylogs`
+-- AUTO_INCREMENT for table `activitylogs`
 --
 ALTER TABLE `activitylogs`
-  MODIFY `id_activity` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_activity` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `banks`
+-- AUTO_INCREMENT for table `banks`
 --
 ALTER TABLE `banks`
-  MODIFY `id_bank` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_bank` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `bts`
+-- AUTO_INCREMENT for table `bts`
 --
 ALTER TABLE `bts`
   MODIFY `id_bts` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `jenis_bts`
+-- AUTO_INCREMENT for table `jenis_bts`
 --
 ALTER TABLE `jenis_bts`
   MODIFY `id_jenis` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `kategoris`
+-- AUTO_INCREMENT for table `kategoris`
 --
 ALTER TABLE `kategoris`
   MODIFY `id_kategori` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `langganans`
+-- AUTO_INCREMENT for table `langganans`
 --
 ALTER TABLE `langganans`
-  MODIFY `id_langganan` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_langganan` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `langganan_invoices`
+-- AUTO_INCREMENT for table `langganan_invoices`
 --
 ALTER TABLE `langganan_invoices`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `layanans`
+-- AUTO_INCREMENT for table `layanans`
 --
 ALTER TABLE `layanans`
   MODIFY `id_layanan` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `master_bts`
+-- AUTO_INCREMENT for table `master_bts`
 --
 ALTER TABLE `master_bts`
   MODIFY `id_master` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `metodes`
+-- AUTO_INCREMENT for table `metodes`
 --
 ALTER TABLE `metodes`
   MODIFY `id_metode` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=672;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=747;
 
 --
--- AUTO_INCREMENT untuk tabel `perangkat_bts`
+-- AUTO_INCREMENT for table `perangkat_bts`
 --
 ALTER TABLE `perangkat_bts`
   MODIFY `id_perangkat_bts` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `personal_access_tokens`
+-- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `ppn`
+-- AUTO_INCREMENT for table `ppn`
 --
 ALTER TABLE `ppn`
   MODIFY `id_ppn` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `profilcv`
+-- AUTO_INCREMENT for table `profilcv`
 --
 ALTER TABLE `profilcv`
   MODIFY `id_profil` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id_role` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `status`
+-- AUTO_INCREMENT for table `status`
 --
 ALTER TABLE `status`
   MODIFY `id_status` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT untuk tabel `turunan_bts`
+-- AUTO_INCREMENT for table `turunan_bts`
 --
 ALTER TABLE `turunan_bts`
   MODIFY `id_turunan` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `bts`
+-- Constraints for table `bts`
 --
 ALTER TABLE `bts`
   ADD CONSTRAINT `bts_jenis_id_foreign` FOREIGN KEY (`jenis_id`) REFERENCES `jenis_bts` (`id_jenis`),
@@ -89328,13 +89362,13 @@ ALTER TABLE `bts`
   ADD CONSTRAINT `bts_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `status` (`id_status`);
 
 --
--- Ketidakleluasaan untuk tabel `districts`
+-- Constraints for table `districts`
 --
 ALTER TABLE `districts`
   ADD CONSTRAINT `districts_regency_id_foreign` FOREIGN KEY (`regency_id`) REFERENCES `regencies` (`id`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `invoices`
+-- Constraints for table `invoices`
 --
 ALTER TABLE `invoices`
   ADD CONSTRAINT `invoices_bank_id_foreign` FOREIGN KEY (`bank_id`) REFERENCES `banks` (`id_bank`),
@@ -89343,7 +89377,7 @@ ALTER TABLE `invoices`
   ADD CONSTRAINT `invoices_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `status` (`id_status`);
 
 --
--- Ketidakleluasaan untuk tabel `langganans`
+-- Constraints for table `langganans`
 --
 ALTER TABLE `langganans`
   ADD CONSTRAINT `langganans_bts_id_foreign` FOREIGN KEY (`bts_id`) REFERENCES `bts` (`id_bts`),
@@ -89357,7 +89391,7 @@ ALTER TABLE `langganans`
   ADD CONSTRAINT `langganans_turunan_id_foreign` FOREIGN KEY (`turunan_id`) REFERENCES `turunan_bts` (`id_turunan`);
 
 --
--- Ketidakleluasaan untuk tabel `langganan_invoices`
+-- Constraints for table `langganan_invoices`
 --
 ALTER TABLE `langganan_invoices`
   ADD CONSTRAINT `langganan_invoices_invoice_id_foreign` FOREIGN KEY (`invoice_id`) REFERENCES `invoices` (`id_invoice`),
@@ -89367,13 +89401,13 @@ ALTER TABLE `langganan_invoices`
   ADD CONSTRAINT `langganan_invoices_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `status` (`id_status`);
 
 --
--- Ketidakleluasaan untuk tabel `layanans`
+-- Constraints for table `layanans`
 --
 ALTER TABLE `layanans`
   ADD CONSTRAINT `layanans_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `status` (`id_status`);
 
 --
--- Ketidakleluasaan untuk tabel `master_bts`
+-- Constraints for table `master_bts`
 --
 ALTER TABLE `master_bts`
   ADD CONSTRAINT `master_bts_desa_id_foreign` FOREIGN KEY (`desa_id`) REFERENCES `villages` (`id`),
@@ -89382,13 +89416,13 @@ ALTER TABLE `master_bts`
   ADD CONSTRAINT `master_bts_provinsi_id_foreign` FOREIGN KEY (`provinsi_id`) REFERENCES `provinces` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `perangkat_bts`
+-- Constraints for table `perangkat_bts`
 --
 ALTER TABLE `perangkat_bts`
   ADD CONSTRAINT `perangkat_bts_bts_id_foreign` FOREIGN KEY (`bts_id`) REFERENCES `bts` (`id_bts`);
 
 --
--- Ketidakleluasaan untuk tabel `profilcv`
+-- Constraints for table `profilcv`
 --
 ALTER TABLE `profilcv`
   ADD CONSTRAINT `profilcv_desa_id_foreign` FOREIGN KEY (`desa_id`) REFERENCES `villages` (`id`),
@@ -89397,13 +89431,13 @@ ALTER TABLE `profilcv`
   ADD CONSTRAINT `profilcv_provinsi_id_foreign` FOREIGN KEY (`provinsi_id`) REFERENCES `provinces` (`id`);
 
 --
--- Ketidakleluasaan untuk tabel `regencies`
+-- Constraints for table `regencies`
 --
 ALTER TABLE `regencies`
   ADD CONSTRAINT `regencies_province_id_foreign` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`id`) ON UPDATE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `turunan_bts`
+-- Constraints for table `turunan_bts`
 --
 ALTER TABLE `turunan_bts`
   ADD CONSTRAINT `turunan_bts_bts_id_foreign` FOREIGN KEY (`bts_id`) REFERENCES `bts` (`id_bts`),
@@ -89414,14 +89448,14 @@ ALTER TABLE `turunan_bts`
   ADD CONSTRAINT `turunan_bts_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `status` (`id_status`);
 
 --
--- Ketidakleluasaan untuk tabel `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_status_id_foreign` FOREIGN KEY (`status_id`) REFERENCES `status` (`id_status`),
   ADD CONSTRAINT `users_user_role_foreign` FOREIGN KEY (`user_role`) REFERENCES `roles` (`id_role`);
 
 --
--- Ketidakleluasaan untuk tabel `villages`
+-- Constraints for table `villages`
 --
 ALTER TABLE `villages`
   ADD CONSTRAINT `villages_district_id_foreign` FOREIGN KEY (`district_id`) REFERENCES `districts` (`id`) ON UPDATE CASCADE;
