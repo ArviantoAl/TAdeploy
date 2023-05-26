@@ -28,6 +28,9 @@ class AllSeeder extends Seeder
             [
                 'nama_role' => 'Pelanggan',
             ],
+            [
+                'nama_role' => 'Keuangan',
+            ],
         ];
         DB::table('roles')->insert($role);
 
@@ -83,10 +86,54 @@ class AllSeeder extends Seeder
         $user = [
             [
                 'name' => 'admin gudang media perkasa',
-                'email' => 'triasrano@gmail.com',
+                'email' => 'admingmp@gmail.com',
                 'username' => 'admingmp',
                 'password' => Hash::make('admingmp2022'),
                 'user_role' => 1,
+                'status_id' => 3,
+                'ppn' => '0',
+                'email_verified_at' => Carbon::now(),
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Pelanggan 1',
+                'email' => 'pel1@user.com',
+                'username' => '0895422940733',
+                'password' => Hash::make('pel111111'),
+                'user_role' => 3,
+                'status_id' => 1,
+                'ppn' => '0',
+                'email_verified_at' => null,
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'Pelanggan 2',
+                'email' => 'pel2@user.com',
+                'username' => '081326087786',
+                'password' => Hash::make('pel222222'),
+                'user_role' => 3,
+                'status_id' => 2,
+                'ppn' => '0',
+                'email_verified_at' => null,
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'keuangan',
+                'email' => 'keuangangmp@user.com',
+                'username' => '085156546461',
+                'password' => Hash::make('keuangan12'),
+                'user_role' => 4,
+                'status_id' => 3,
+                'ppn' => '0',
+                'email_verified_at' => Carbon::now(),
+                'created_at' => Carbon::now(),
+            ],
+            [
+                'name' => 'teknisi 1',
+                'email' => 'teknisigmp@user.com',
+                'username' => '087878785456',
+                'password' => Hash::make('teknisi123'),
+                'user_role' => 2,
                 'status_id' => 3,
                 'ppn' => '0',
                 'email_verified_at' => Carbon::now(),
@@ -226,5 +273,12 @@ class AllSeeder extends Seeder
             ],
         ];
         DB::table('banks')->insert($bank);
+
+        $master_mikrotik = [
+            [
+                'uname' => 'admin',
+                'password' => 'admin',
+            ]];
+        DB::table('master_mikrotik')->insert($master_mikrotik);
     }
 }

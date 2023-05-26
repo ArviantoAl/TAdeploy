@@ -19,6 +19,7 @@ use App\Models\Status;
 use App\Models\TurunanBts;
 use App\Models\User;
 use App\Models\Village;
+use App\Models\MasterMikrotik;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -89,6 +90,8 @@ class InvoiceController extends Controller
             return view('dashboard.admin.invoice', compact('banks','invoices', 'selected2', 'selected', 'bulan', 'vabulan', 'tahun', 'metodes'));
         }elseif(auth()->user()->user_role==2){
             return view('dashboard.teknisi.invoice', compact('invoices'));
+        }elseif(auth()->user()->user_role==4){
+            return view('dashboard.keuangan.invoice', compact('banks','invoices', 'selected2', 'selected', 'bulan', 'vabulan', 'tahun', 'metodes'));
         }elseif(auth()->user()->user_role==3){
             $subject = 'Pelanggan, Daftar Invoice';
             LogActivity::addToLog($subject);

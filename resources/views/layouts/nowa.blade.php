@@ -417,6 +417,8 @@
         @include('layouts.sidebar-teknisi')
     @elseif(Auth::user()->user_role == 3)
         @include('layouts.sidebar-pelanggan')
+        @elseif(Auth::user()->user_role == 4)
+        @include('layouts.sidebar-keuangan')
     @endif
 
         <!-- main-sidebar -->
@@ -1267,6 +1269,6 @@
 
 <!-- Internal form-elements js -->
 <script src="{{ asset('nowa_assets') }}/js/form-elements.js"></script>
-
+@stack('scripts')
 </body>
 </html>

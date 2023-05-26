@@ -175,12 +175,18 @@ class DashboardController extends Controller
                 'namabulans','bulanCount','batas_max','terCount','belCount','batCount'));
         }elseif(auth()->user()->user_role==2){
             return view('dashboard.teknisi.index');
+        }elseif(auth()->user()->user_role==4){
+            return view('dashboard.keuangan.index',compact('h_invoice','h_terbayar','h_belumbayar','h_tidakbayar',
+            'bulan','vabulan','tahun','selected','selected2','total','bel','ter','bat',
+            'namabulans','bulanCount','batas_max','terCount','belCount','batCount'));  
         }elseif(auth()->user()->user_role==3){
             $subject = 'Pelanggan, Dashboard';
             LogActivity::addToLog($subject);
             return view('dashboard.pelanggan.index');
         }
     }
+
+
 
     public function export_filter(Request $request){
         $bulannow = $request->bulan;

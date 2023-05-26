@@ -150,10 +150,10 @@
                                             <h5>
                                                 <span class="badge badge-pill bg-danger me-1">{{ $user->status->nama_status }}</span>
                                             </h5>
-                                        </td>)
+                                        </td>
                                     @endif
                                     <td>
-                                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal{{$user->id_user}}" data-toggle="tooltip" title="Lihat Langganan Pelanggan">
+                                        <a class="btn btn-warning" href="{{ route('admin.detail_pelanggan', $user->id_user) }}" data-bs-target="#myModal{{$user->id_user}}" data-toggle="tooltip" title="Lihat Langganan Pelanggan">
                                             <i style="color: white" class="fa fa-eye"></i>
                                         </a>
                                     </td>
@@ -248,6 +248,8 @@
                                     <th>No</th>
                                     <th>Alamat Pemasangan</th>
                                     <th>Jenis Langganan</th>
+                                    <th>IP Adress</th>
+                                    <th>Status IP</th>
                                     <th>Tanggal Expired</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -259,6 +261,8 @@
                                         <td>{{ $no+1 }}</td>
                                         <td>{{ $langganan->alamat_pasang }}</td>
                                         <td>{{ $langganan->layanan->nama_layanan }}</td>
+                                        <td>{{ $langganan->ip }}</td>
+                                        <td>{{ exec("ping -n 1 " . $langganan->ip, $output, $result)}}</td>
                                         <td>{{ $langganan->tgl_lanjut }}</td>
                                         @if($langganan->status_id == 1)
                                             <td>

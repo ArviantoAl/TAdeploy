@@ -37,5 +37,8 @@ class ResetPasswordController extends Controller
         }elseif(auth()->user()->user_role==3){
             return route('pelanggan.dashboard');
         }
+        elseif(auth()->user()->user_role==4){
+            return route('keuangan.dashboard');
+        }
     }
 }

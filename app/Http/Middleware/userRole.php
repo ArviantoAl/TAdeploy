@@ -21,6 +21,8 @@ class userRole
             return $next($request);
         }elseif(Auth::check() && Auth::user()->user_role == 2){
             return $next($request);
+        }elseif(Auth::check() && Auth::user()->user_role == 4){
+            return $next($request);
         }elseif(Auth::check() && Auth::user()->user_role == 3) {
             return $next($request);
         }

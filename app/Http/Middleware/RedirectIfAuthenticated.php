@@ -29,6 +29,8 @@ class RedirectIfAuthenticated
                 return redirect()->route('admin.dashboard');
             }elseif(Auth::guard($guard)->check() && Auth::user()->user_role == 2){
                 return redirect()->route('teknisi.dashboard');
+            }elseif(Auth::guard($guard)->check() && Auth::user()->user_role == 4){
+                return redirect()->route('keuangan.dashboard');
             }elseif(Auth::guard($guard)->check() && Auth::user()->user_role == 3) {
                 if (Auth::user()->status_id == 2 || Auth::user()->status_id == 3){
                     return redirect()->route('pelanggan.dashboard');

@@ -126,20 +126,20 @@
 {{--                </li>--}}
 
                 <li class="side-item side-item-category">User</li>
-{{--                <li class="slide{{ ($titlePage == 'Daftar Semua User' || $titlePage == 'Tambah User') ? ' is-expanded' : '' }}">--}}
-{{--                    <a class="side-menu__item{{ ($titlePage == 'Daftar Semua User' || $titlePage == 'Tambah User' || $titlePage == 'Edit User') ? ' active' : '' }}" data-bs-toggle="slide" href="javascript:void(0);">--}}
-{{--                        <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">--}}
-{{--                            <path d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z"/>--}}
-{{--                        </svg>--}}
-{{--                        <span class="side-menu__label">Data User</span>--}}
-{{--                        <i class="angle fe fe-chevron-right"></i>--}}
-{{--                    </a>--}}
-{{--                    <ul class="slide-menu">--}}
-{{--                        <li class="side-menu__label1"><a href="javascript:void(0);">Data User</a></li>--}}
-{{--                        <li><a class="slide-item{{ $titlePage == 'Daftar Semua User' ? ' active' : '' }}" href="{{route('admin.user')}}">Daftar Semua User</a></li>--}}
-{{--                        <li><a class="slide-item{{ $titlePage == 'Tambah User' ? ' active' : '' }}" href="{{route('admin.tambahuser')}}">Tambah User</a></li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
+               <li class="slide{{ ($titlePage == 'Daftar Semua User' || $titlePage == 'Tambah User') ? ' is-expanded' : '' }}">
+                   <a class="side-menu__item{{ ($titlePage == 'Daftar Semua User' || $titlePage == 'Tambah User' || $titlePage == 'Edit User') ? ' active' : '' }}" data-bs-toggle="slide" href="javascript:void(0);">
+                       <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
+                           <path d="M12,5.5A3.5,3.5 0 0,1 15.5,9A3.5,3.5 0 0,1 12,12.5A3.5,3.5 0 0,1 8.5,9A3.5,3.5 0 0,1 12,5.5M5,8C5.56,8 6.08,8.15 6.53,8.42C6.38,9.85 6.8,11.27 7.66,12.38C7.16,13.34 6.16,14 5,14A3,3 0 0,1 2,11A3,3 0 0,1 5,8M19,8A3,3 0 0,1 22,11A3,3 0 0,1 19,14C17.84,14 16.84,13.34 16.34,12.38C17.2,11.27 17.62,9.85 17.47,8.42C17.92,8.15 18.44,8 19,8M5.5,18.25C5.5,16.18 8.41,14.5 12,14.5C15.59,14.5 18.5,16.18 18.5,18.25V20H5.5V18.25M0,20V18.5C0,17.11 1.89,15.94 4.45,15.6C3.86,16.28 3.5,17.22 3.5,18.25V20H0M24,20H20.5V18.25C20.5,17.22 20.14,16.28 19.55,15.6C22.11,15.94 24,17.11 24,18.5V20Z"/>
+                       </svg>
+                       <span class="side-menu__label">Data User</span>
+                       <i class="angle fe fe-chevron-right"></i>
+                   </a>
+                   <ul class="slide-menu">
+                       <li class="side-menu__label1"><a href="javascript:void(0);">Data User</a></li>
+                       <li><a class="slide-item{{ $titlePage == 'Daftar Semua User' ? ' active' : '' }}" href="{{route('admin.user')}}">Daftar Semua User</a></li>
+                       <li><a class="slide-item{{ $titlePage == 'Tambah User' ? ' active' : '' }}" href="{{route('admin.tambahuser')}}">Tambah User</a></li>
+                   </ul>
+               </li>
                 <li class="slide{{ $titlePage == 'Daftar Pelanggan Aktif' ? ' is-expanded' : '' }}">
                     <a class="side-menu__item{{ $titlePage == 'Daftar Pelanggan Aktif' ? ' active' : '' }}" href="{{route('admin.pelangganaktif')}}">
                         <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
@@ -148,6 +148,19 @@
                         <span class="side-menu__label">Daftar Pelanggan</span>
                     </a>
                 </li>
+
+                {{-- <li class="side-item side-item-category">Pengelolaan</li>
+                <li class="slide{{ $titlePage == 'Daftar User' ? ' is-expanded' : '' }}">
+                    <a class="side-menu__item{{ $titlePage == 'Daftar User' ? ' active' : '' }}"
+                        href="{{ url('admin/users') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" width="24" height="24"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M21.1,12.5L22.5,13.91L15.97,20.5L12.5,17L13.9,15.59L15.97,17.67L21.1,12.5M10,17L13,20H3V18C3,15.79 6.58,14 11,14L12.89,14.11L10,17M11,4A4,4 0 0,1 15,8A4,4 0 0,1 11,12A4,4 0 0,1 7,8A4,4 0 0,1 11,4Z" />
+                        </svg>
+                        <span class="side-menu__label">Daftar User</span>
+                    </a>
+                </li> --}}
 
                 <li class="side-item side-item-category">Langganan dan Pemesanan</li>
                 {{--                langganan--}}

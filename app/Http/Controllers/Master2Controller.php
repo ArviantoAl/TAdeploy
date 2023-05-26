@@ -12,6 +12,7 @@ use App\Models\Metode;
 use App\Models\Province;
 use App\Models\Regency;
 use App\Models\Village;
+use App\Models\MasterMikrotik;
 use Illuminate\Http\Request;
 
 class Master2Controller extends Controller
@@ -380,6 +381,12 @@ class Master2Controller extends Controller
         return view('dashboard.admin.bank.index', compact('banks'));
     }
 
+    public function keuangan_bank_index(){
+        $banks = Bank::query()->paginate(10);
+
+        return view('dashboard.keuangan.bank.index', compact('banks'));
+    }
+
     public function tambah_bank(){
         $bank = new Bank();
 
@@ -397,6 +404,23 @@ class Master2Controller extends Controller
             ->with('success','Kategori Bank berhasil ditambahkan.');
     }
 
+    public function keuangan_tambah_bank(){
+        $bank = new Bank();
+
+        return view('dashboard.keuangan.bank.tambah_bank', compact('bank'));
+    }
+
+    public function keuangan_post_tambah_bank(Request $request){
+        $bank = new Bank();
+        $bank->nama_bank = $request->n_bank;
+        $bank->no_rek = $request->norek;
+
+        $bank->save();
+
+        return redirect()->route('keuangan.bank')
+            ->with('success','Kategori Bank berhasil ditambahkan.');
+    }
+
     public function edit_bank($id_bank){
         $bank = Bank::query()->find($id_bank);
 
@@ -411,6 +435,23 @@ class Master2Controller extends Controller
         $bank->save();
 
         return redirect()->route('admin.bank')
+            ->with('success','Kategori Bank berhasil diubah.');
+    }
+
+    public function keuangan_edit_bank($id_bank){
+        $bank = Bank::query()->find($id_bank);
+
+        return view('dashboard.keuangan.bank.edit_bank', compact('bank'));
+    }
+
+    public function keuangan_post_edit_bank(Request $request ,$id_bank){
+        $bank = Bank::query()->find($id_bank);
+        $bank->nama_bank = $request->n_bank;
+        $bank->no_rek = $request->norek;
+
+        $bank->save();
+
+        return redirect()->route('keuangan.bank')
             ->with('success','Kategori Bank berhasil diubah.');
     }
     //get ajax
@@ -479,4 +520,163 @@ class Master2Controller extends Controller
         }
         echo $option;
     }
+
+    //teknisi
+    public function teknisi_bts_index(){
+        $btss = Bts::query()->paginate(10);
+
+        return view('dashboard.teknisi.bts.index', compact('btss'));
+    }
+
+    public function teknisi_tambah_bts(){
+        $bts = new Bts();
+        $lokasis = MasterBts::all();
+        $jeniss = JenisBts::all();
+        $kategoris = Kategori::all();
+
+        return view('dashboard.teknisi.bts.tambah_btspolos', compact('bts','lokasis', 'jeniss', 'kategoris'));
+    }
+
+    public function teknisi_post_tambah_bts(Request $request){
+        $nama = $request->nama;
+        $lokasi_id = $request->lokasi;
+        $jenis_id = $request->jenis;
+        $kategori_id = $request->k_frekuensi;
+        $frekuensi = $request->frekuensi;
+        $ssid = $request->ssid;
+        $ip = $request->ip;
+
+        if ($jenis_id == 0){
+            return redirect()->back()
+                ->with('error','Jenis BTS belum dipilih.');
+        }elseif ($kategori_id == 0){
+            return redirect()->route('teknisi.tambahbts')
+                ->with('error','Kategori Frekuensi belum dipilih.');
+        }elseif ($lokasi_id == 0){
+            return redirect()->route('teknisi.tambahbts')
+                ->with('error','Lokasi BTS belum dipilih.');
+        }else{
+            $bts = new Bts();
+            $bts->nama_bts = $nama;
+            $bts->lokasi_id = $lokasi_id;
+            $bts->jenis_id = $jenis_id;
+            $bts->kategori_id = $kategori_id;
+            $bts->frekuensi = $frekuensi;
+            $bts->ssid = $ssid;
+            $bts->ip = $ip;
+
+            $bts->status_id = 3;
+
+            $bts->save();
+            return redirect()->route('teknisi.bts')
+                ->with('success','Perangkat BTS berhasil ditambahkan.');
+        }
+    }
+
+    public function teknisi_edit_bts($id_bts){
+        $bts = Bts::find($id_bts);
+        $lokasis = MasterBts::all();
+        $jeniss = JenisBts::all();
+        $kategoris = Kategori::all();
+
+        return view('dashboard.teknisi.bts.edit_bts', compact('bts','lokasis', 'jeniss', 'kategoris'));
+    }
+
+    public function teknisi_post_edit_bts(Request $request ,$id_bts){
+        $nama = $request->nama;
+        $lokasi_id = $request->lokasi;
+        $jenis_id = $request->jenis;
+        $kategori_id = $request->k_frekuensi;
+        $frekuensi = $request->frekuensi;
+        $ssid = $request->ssid;
+        $ip = $request->ip;
+
+        if ($jenis_id == 0){
+            return redirect()->back()
+                ->with('error','Jenis BTS belum dipilih.');
+        }elseif ($kategori_id == 0){
+            return redirect()->route('teknisi.tambahbts')
+                ->with('error','Kategori Frekuensi belum dipilih.');
+        }elseif ($lokasi_id == 0){
+            return redirect()->route('teknisi.tambahbts')
+                ->with('error','Lokasi BTS belum dipilih.');
+        }else{
+            $bts = Bts::query()->find($id_bts);
+            $bts->nama_bts = $nama;
+            $bts->lokasi_id = $lokasi_id;
+            $bts->jenis_id = $jenis_id;
+            $bts->kategori_id = $kategori_id;
+            $bts->frekuensi = $frekuensi;
+            $bts->ssid = $ssid;
+            $bts->ip = $ip;
+
+            $bts->status_id = 3;
+
+            $bts->save();
+            return redirect()->route('teknisi.bts')
+                ->with('success','Perangkat '.$nama.' berhasil diubah.');
+        }
+    }
+
+    public function teknisi_nonaktif_bts($id_bts)
+    {
+        $bts = Bts::find($id_bts);
+        $nama = $bts->nama_bts;
+        $bts->status_id = 4;
+        $bts->save();
+
+        return back()->with('success', $nama.' telah dinonaktifkan!');
+    }
+
+    public function teknisi_aktif_bts($id_bts)
+    {
+        $bts = Bts::find($id_bts);
+        $nama = $bts->nama_bts;
+        $bts->status_id = 3;
+        $bts->save();
+
+        return back()->with('success', $nama.' telah diaktifkan!');
+    }
+
+    //master mikrotik
+    public function mastermikrotik_index(){
+        $master_mikrotik = MasterMikrotik::query()->paginate(10);
+
+        return view('dashboard.teknisi.mastermikrotik.index', compact('master_mikrotik'));
+    }
+
+    public function tambah_master_mikrotik(){
+        $master_mikrotik = new MasterMikrotik();
+        
+        return view('dashboard.teknisi.mastermikrotik.tambah_mastermikrotik', compact('master_mikrotik'));
+    }
+
+    public function post_tambah_mastermikrotik(Request $request){
+        $master_mikrotik = new MasterMikrotik();
+        $master_mikrotik->uname = $request->uname;
+        $master_mikrotik->password = $request->pw;
+
+        $master_mikrotik->save();
+
+        return redirect()->route('teknisi.mastermikrotik')
+            ->with('success','Master Mikrotik berhasil ditambahkan.');
+    }
+
+    public function edit_mastermikrotik($id_master){
+        $master_mikrotik = mastermikrotik::query()->find($id_master);
+
+        return view('dashboard.teknisi.mastermikrotik.edit_mastermikrotik', compact('master_mikrotik'));
+    }
+
+    public function post_edit_mastermikrotik($id_master, Request $request ){
+        $master_mikrotik = mastermikrotik::query()->find($id_master);
+        $master_mikrotik->uname = $request->uname;
+        $master_mikrotik->password = $request->pw;
+
+        $master_mikrotik->save();
+
+        return redirect()->route('teknisi.mastermikrotik')
+            ->with('success','Kategori mastermikrotik berhasil diubah.');
+    }
+
 }

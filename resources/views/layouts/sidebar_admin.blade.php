@@ -16,14 +16,32 @@
             @endif
             <a class="nav-link" href="{{ route('admin.dashboard') }}"><i class="far fa-square"></i> <span>Dashboard</span></a></li>
 {{--User--}}
-            <li class="menu-header">User</li>
-            @if($titlePage == 'Daftar User'|| $titlePage == 'Tambah User')
-                <li class="nav-item dropdown active">
-            @else
-                <li class="nav-item dropdown">
-                    @endif
-                    <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Data User</span></a>
-                    <ul class="dropdown-menu">
+        <a href="#" class="nav-link has-dropdown"><i class="fas fa-users"></i><span>Data User</span></a>
+        <ul class="dropdown-menu">
+            {{-- daftar user --}}
+            @if ($titlePage == 'Daftar User')
+                <li class="active">
+                @else
+                <li>
+            @endif
+            <a class="nav-link" href="{{ route('admin.user') }}">Daftar User</a></li>
+            {{-- tambah user --}}
+            @if ($titlePage == 'Tambah User')
+                <li class="active">
+                @else
+                <li>
+            @endif
+            <a class="nav-link" href="{{ route('admin.tambahuser') }}">Tambah User</a></li>
+        </ul>
+        <ul class="dropdown-menu">
+            {{-- daftar user --}}
+            @if ($titlePage == 'Daftar Pelanggan Aktif')
+                <li class="active">
+                @else
+                <li>
+            @endif
+            <a class="nav-link" href="{{ route('admin.pelanggan_aktif') }}">Pelanggan aktif</a></li>
+        </li>
 {{--daftar user--}}
                         @if($titlePage == 'Daftar User')
                             <li class="active">
@@ -40,6 +58,7 @@
                                     <a class="nav-link" href="{{route('admin.tambahuser')}}">Tambah User</a></li>
                     </ul>
                 </li>
+
 {{--layanan dan kategori--}}
                 <li class="menu-header">Layanan dan Kategori</li>
                 @if($titlePage == 'Daftar Kategori'|| $titlePage == 'Tambah Kategori')

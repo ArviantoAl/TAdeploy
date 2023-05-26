@@ -133,7 +133,8 @@ class UserController extends Controller
                 'langganan' => $langganans
             ];
         }
-        return view('dashboard.admin.user.pelanggan_aktif', compact('terakhir', 'bulan', 'users', 'langganan', 'nama_status', 'namabulan'));
+        
+        return view('dashboard.admin.langganan', compact('terakhir', 'bulan', 'users', 'langganan', 'nama_status', 'namabulan'));
     }
 
     public function nonaktif_pelanggan($id_pelanggan){
@@ -197,7 +198,10 @@ class UserController extends Controller
             $nama_role = 'Teknisi';
         }elseif ($request->user_role == 3){
             $nama_role = 'Pelanggan';
+        }elseif ($request->user_role == 4){
+            $nama_role = 'keuangan';
         }
+        
 
         $user->save();
 
@@ -260,9 +264,11 @@ class UserController extends Controller
     {
         $user = User::find($id_user);
         $user->delete();
-
-        return redirect()->route('admin.user')
-            ->with('success','User berhasil dihapus.');
+        if (auth()->user()->user_role == 1) {
+            return redirect('admin/users')
+                ->with('success', 'User berhasil dihapus.');
+        }
+        return redirect('teknisi/user')->with('success', 'User berhasil dihapus');
     }
 
     public function export($id_user){
@@ -299,4 +305,240 @@ class UserController extends Controller
 //dd($data_ambil);
         return view('dashboard.admin.print.pelanggan', compact('data_ambil'));
     }
+
+    public function edit_users($id_user)
+    {
+        $user = User::find($id_user);
+        if (auth()->user()->user_role == 1) {
+            return view('dashboard.admin.users.edit_user', compact('user'));
+        }
+        return view('dashboard.admin.users.edit_user', compact('user'));
+    }
+
+    public function post_edit_users(Request $request, $id_user)
+    {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id_user . ',id_user',
+        ]);
+
+        $user = User::find($id_user);
+        $user->name = $request->name;
+        $user->username = $request->username;
+        $user->email = $request->email;
+        $nama = $user->name;
+        $user->save();
+        if (auth()->user()->user_role == 1) {
+            // return redirect()->route('admin.pelangganaktif')->with('success', 'Pelanggan ' . $nama . ' berhasil diubah.');
+            return redirect('admin/users')->with('success', 'Pelanggan ' . $nama . ' berhasil diubah.');
+        }
+        return redirect('teknisi/user')->with('success', 'Pelanggan ' . $nama . ' berhasil diubah.');
+    }
+
+    public function edit_users_role($id_user)
+    {
+        $user = User::find($id_user);
+        if (auth()->user()->user_role == 1) {
+            return view('dashboard.admin.user.edit_user_role', compact('user'));
+        }
+        // return view('dashboard.admin.user.edit_user', compact('user'));
+    }
+    public function updateRole($id_user)
+    {
+        $user = User::find($id_user);
+        $user->update(['user_role' => request('role')]);
+        if (auth()->user()->user_role == 1) {
+            return redirect('admin/users')
+                ->with('success', 'User berhasil diupdate rolenya.');
+        }
+    }
+
+    //teknisi
+
+    public function teknisi_data_user(){
+        $users = User::query()->paginate(10);
+        return view('dashboard.teknisi.user.user', compact('users'));
+    }
+    public function post_teknisi_edit_user(Request $request ,$id_user){
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'email' => 'required',
+        ]);
+        $user = User::find($id_user);
+        $username2 = $user->username;
+        $email2 = $user->email;
+        $username = $request->username;
+        $email = $request->email;
+
+        $getuser = User::query()
+            ->where('email','=',$email)
+            ->get();
+        $getuser2 = User::query()
+            ->where('username', '=', $username)
+            ->get();
+
+        if (count($getuser)>0 && $email!=$email2){
+            return back()->with('error','email sudah digunakan');
+        }elseif (count($getuser2)>0 && $username!=$username2){
+            return back()->with('error','no hp sudah digunakan');
+        }
+
+        $user = User::find($id_user);
+        $user->name = $request->name;
+        $user->username = $username;
+        $user->email = $email;
+        $nama = $user->name;
+        $user->save();
+
+        return redirect()->route('teknisi.pelangganaktif')->with('success','Pelanggan '.$nama.' berhasil diubah.');
+    }
+        public function teknisi_tambah_user(){
+            $roles = Role::all();
+            $user = new User();
+            return view('dashboard.teknisi.user.tambah_user', compact('roles', 'user'));
+        }
+
+        public function teknisi_pelanggan_aktif(Request $request){
+            $cv = ProfilCv::query()->find(1);
+            $terakhir = $cv->terakhir_generate;
+            //bulan harus sub
+            $bulan=Carbon::now()->subMonth()->format('n');
+            $namabulan=Carbon::now()->translatedFormat('F');
+    
+            if ($request->has('status') || $request->has('search')){
+                if ($request->status=='all'){
+                    $user = User::query()->where('user_role', '=', 3)
+                        ->where('name', 'LIKE', '%'.$request->search.'%');
+                    $nama_status = 'Semua';
+                }else{
+                    $user = User::query()->where('user_role', '=', 3)
+                        ->where('name', 'LIKE', '%'.$request->search.'%')
+                        ->where('status_id', '=', $request->status);
+                    $status = Status::query()->find($request->status);
+                    $nama_status = $status->nama_status;
+                }
+            }else{
+                $user = User::query()->where('user_role', '=', 3)
+                    ->where('status_id', '=', 3);
+                $status = Status::query()->find(3);
+                $nama_status = $status->nama_status;
+            }
+    
+            $getuser = $user->get();
+            $users = $user->orderBy('created_at', 'DESC')->paginate(10);
+            $users->appends($request->all());
+    
+            $langganan = [];
+            foreach ($getuser as $usr){
+                $id_user = $usr->id_user;
+                $name = $usr->name;
+                $langganans = Langganan::query()
+                    ->where('pelanggan_id', '=', $id_user)
+                    ->get();
+                $langganan[] = [
+                    'id' => $id_user,
+                    'name' => $name,
+                    'langganan' => $langganans
+                ];
+            }
+            
+            return view('dashboard.teknisi.user.pelanggan_aktif', compact('terakhir', 'bulan', 'users', 'langganan', 'nama_status', 'namabulan'));
+        }
+
+        public function keuangan_pelanggan_aktif(Request $request){
+            $cv = ProfilCv::query()->find(1);
+            $terakhir = $cv->terakhir_generate;
+            //bulan harus sub
+            $bulan=Carbon::now()->subMonth()->format('n');
+            $namabulan=Carbon::now()->translatedFormat('F');
+    
+            if ($request->has('status') || $request->has('search')){
+                if ($request->status=='all'){
+                    $user = User::query()->where('user_role', '=', 3)
+                        ->where('name', 'LIKE', '%'.$request->search.'%');
+                    $nama_status = 'Semua';
+                }else{
+                    $user = User::query()->where('user_role', '=', 3)
+                        ->where('name', 'LIKE', '%'.$request->search.'%')
+                        ->where('status_id', '=', $request->status);
+                    $status = Status::query()->find($request->status);
+                    $nama_status = $status->nama_status;
+                }
+            }else{
+                $user = User::query()->where('user_role', '=', 3)
+                    ->where('status_id', '=', 3);
+                $status = Status::query()->find(3);
+                $nama_status = $status->nama_status;
+            }
+    
+            $getuser = $user->get();
+            $users = $user->orderBy('created_at', 'DESC')->paginate(10);
+            $users->appends($request->all());
+    
+            $langganan = [];
+            foreach ($getuser as $usr){
+                $id_user = $usr->id_user;
+                $name = $usr->name;
+                $langganans = Langganan::query()
+                    ->where('pelanggan_id', '=', $id_user)
+                    ->get();
+                $langganan[] = [
+                    'id' => $id_user,
+                    'name' => $name,
+                    'langganan' => $langganans
+                ];
+            }
+            
+            return view('dashboard.keuangan.pelanggan_aktif', compact('terakhir', 'bulan', 'users', 'langganan', 'nama_status', 'namabulan'));
+        }
+
+        public function teknisi_detail_pelanggan_aktif(Request $request){
+            $cv = ProfilCv::query()->find(1);
+            $terakhir = $cv->terakhir_generate;
+            //bulan harus sub
+            $bulan=Carbon::now()->subMonth()->format('n');
+            $namabulan=Carbon::now()->translatedFormat('F');
+    
+            if ($request->has('status') || $request->has('search')){
+                if ($request->status=='all'){
+                    $user = User::query()->where('user_role', '=', 3)
+                        ->where('name', 'LIKE', '%'.$request->search.'%');
+                    $nama_status = 'Semua';
+                }else{
+                    $user = User::query()->where('user_role', '=', 3)
+                        ->where('name', 'LIKE', '%'.$request->search.'%')
+                        ->where('status_id', '=', $request->status);
+                    $status = Status::query()->find($request->status);
+                    $nama_status = $status->nama_status;
+                }
+            }else{
+                $user = User::query()->where('user_role', '=', 3)
+                    ->where('status_id', '=', 3);
+                $status = Status::query()->find(3);
+                $nama_status = $status->nama_status;
+            }
+    
+            $getuser = $user->get();
+            $users = $user->orderBy('created_at', 'DESC')->paginate(10);
+            $users->appends($request->all());
+    
+            $langganan = [];
+            foreach ($getuser as $usr){
+                $id_user = $usr->id_user;
+                $name = $usr->name;
+                $langganans = Langganan::query()
+                    ->where('pelanggan_id', '=', $id_user)
+                    ->get();
+                $langganan[] = [
+                    'id' => $id_user,
+                    'name' => $name,
+                    'langganan' => $langganans
+                ];
+            }
+            
+            return view('dashboard.teknisi.user.detail_pelanggan', compact('terakhir', 'bulan', 'users', 'langganan', 'nama_status', 'namabulan'));
+        }
+
 }
