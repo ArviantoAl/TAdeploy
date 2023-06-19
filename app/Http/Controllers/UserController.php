@@ -494,51 +494,74 @@ class UserController extends Controller
             return view('dashboard.keuangan.pelanggan_aktif', compact('terakhir', 'bulan', 'users', 'langganan', 'nama_status', 'namabulan'));
         }
 
-        public function teknisi_detail_pelanggan_aktif(Request $request){
-            $cv = ProfilCv::query()->find(1);
-            $terakhir = $cv->terakhir_generate;
-            //bulan harus sub
-            $bulan=Carbon::now()->subMonth()->format('n');
-            $namabulan=Carbon::now()->translatedFormat('F');
+    //     public function teknisi_detail_pelanggan_aktif(Request $request)
+    // {
+    //     $cv = ProfilCv::query()->find(1);
+    //         $terakhir = $cv->terakhir_generate;
+    //         //bulan harus sub
+    //         $bulan=Carbon::now()->subMonth()->format('n');
+    //         $namabulan=Carbon::now()->translatedFormat('F');
     
-            if ($request->has('status') || $request->has('search')){
-                if ($request->status=='all'){
-                    $user = User::query()->where('user_role', '=', 3)
-                        ->where('name', 'LIKE', '%'.$request->search.'%');
-                    $nama_status = 'Semua';
-                }else{
-                    $user = User::query()->where('user_role', '=', 3)
-                        ->where('name', 'LIKE', '%'.$request->search.'%')
-                        ->where('status_id', '=', $request->status);
-                    $status = Status::query()->find($request->status);
-                    $nama_status = $status->nama_status;
-                }
-            }else{
-                $user = User::query()->where('user_role', '=', 3)
-                    ->where('status_id', '=', 3);
-                $status = Status::query()->find(3);
-                $nama_status = $status->nama_status;
-            }
+    //         if ($request->has('status') || $request->has('search')){
+    //             if ($request->status=='all'){
+    //                 $user = User::query()->where('user_role', '=', 3)
+    //                     ->where('name', 'LIKE', '%'.$request->search.'%');
+    //                 $nama_status = 'Semua';
+    //             }else{
+    //                 $user = User::query()->where('user_role', '=', 3)
+    //                     ->where('name', 'LIKE', '%'.$request->search.'%')
+    //                     ->where('status_id', '=', $request->status);
+    //                 $status = Status::query()->find($request->status);
+    //                 $nama_status = $status->nama_status;
+    //             }
+    //         }else{
+    //             $user = User::query()->where('user_role', '=', 3)
+    //                 ->where('status_id', '=', 3);
+    //             $status = Status::query()->find(3);
+    //             $nama_status = $status->nama_status;
+    //         }
     
-            $getuser = $user->get();
-            $users = $user->orderBy('created_at', 'DESC')->paginate(10);
-            $users->appends($request->all());
+    //         $putuser = $user->put();
+    //         $users = $user->orderBy('created_at', 'DESC')->paginate(10);
+    //         $users->appends($request->all());
     
-            $langganan = [];
-            foreach ($getuser as $usr){
-                $id_user = $usr->id_user;
-                $name = $usr->name;
-                $langganans = Langganan::query()
-                    ->where('pelanggan_id', '=', $id_user)
-                    ->get();
-                $langganan[] = [
-                    'id' => $id_user,
-                    'name' => $name,
-                    'langganan' => $langganans
-                ];
-            }
-            
-            return view('dashboard.teknisi.user.detail_pelanggan', compact('terakhir', 'bulan', 'users', 'langganan', 'nama_status', 'namabulan'));
-        }
+    //         $langganan = [];
+    //         foreach ($putuser as $usr){
+    //             $id_user = $usr->id_user;
+    //             $name = $usr->name;
+    //             $langganans = Langganan::query()
+    //                 ->where('pelanggan_id', '=', $id_user)
+    //                 ->put();
+    //             $langganan[] = [
+    //                 'id' => $id_user,
+    //                 'name' => $name,
+    //                 'langganan' => $langganans
+    //             ];
+    //         }
+             
+    //         return view('dashboard.teknisi.user.detail_pelanggan', compact('terakhir', 'bulan', 'users', 'langganan', 'nama_status', 'namabulan'));
+    // }
+
+    // public function put_detail_pelanggan_aktif(Request $request)
+    // {
+             
+    //         return view('dashboard.teknisi.user.detail_pelanggan', compact('terakhir', 'bulan', 'users', 'langganan', 'nama_status', 'namabulan'));
+    // }
+
+    // public function teknisi_detail_pelanggan_aktif($id_langganan){
+    //     $langganans = langganan::query()->find($id_langganan);
+
+    //     return view('dashboard.teknisi.user.detail_pelanggan', compact('langganans'));
+    // }
+
+    // public function post_detail_pelanggan_aktif($id_langganan, Request $request ){
+    //     $langganans = langganan::query()->find($id_langganan);
+    //     $langganans->alamat_pasang = $request->alamat_pasang;
+    //     $langganans->nama_layanan = $request->nama_layanan;
+    //     $langganans->ip = $request->ip;
+    //     $langganans->tgl_lanjut = $request->tgl_lanjut;
+        
+    //     return view('dashboard.teknisi.user.detail_pelanggan', compact('langganans'));
+    // }
 
 }

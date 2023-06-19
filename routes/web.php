@@ -213,7 +213,7 @@ Route::group(['prefix'=>'teknisi','middleware'=>['userRole','auth']],function ()
     Route::put('posteditmastermikrotik/{id_master}', [Master2Controller::class, 'post_edit_mastermikrotik'])->name('teknisi.posteditmastermikrotik');
     // pelanggan aktif
     Route::get('data_pelanggan_aktif', [UserController::class, 'teknisi_pelanggan_aktif'])->name('teknisi.pelangganaktif');
-    Route::get('data_detail_pelanggan', [UserController::class, 'teknisi_detail_pelanggan_aktif'])->name('teknisi.detailpelangganaktif');
+    
     // kelola master bts
     Route::get('data_bts', [Master2Controller::class, 'teknisi_bts_index'])->name('teknisi.bts');
     Route::get('tambahbts', [Master2Controller::class, 'teknisi_tambah_bts'])->name('teknisi.tambahbts');

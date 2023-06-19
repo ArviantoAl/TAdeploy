@@ -39,7 +39,7 @@
                 </form>
             @endif
 
-            <form action="{{ route('teknisi.pelangganaktif') }}" method="GET">
+            <form action="{{ route('admin.pelangganaktif') }}" method="GET">
                 <div class="row row-xs">
                     <div class="form-group col-md-2">
                         <select name="status" id="status" class="form-control form-select select2" data-placeholder="Filter status">
@@ -150,10 +150,10 @@
                                             <h5>
                                                 <span class="badge badge-pill bg-danger me-1">{{ $user->status->nama_status }}</span>
                                             </h5>
-                                        </td>
+                                        </td>)
                                     @endif
                                     <td>
-                                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal{{$user->id_user}}" data-bs-target="#myModal{{$user->id_user}}" data-toggle="tooltip" title="Lihat Langganan Pelanggan">
+                                        <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal{{$user->id_user}}" data-toggle="tooltip" title="Lihat Langganan Pelanggan">
                                             <i style="color: white" class="fa fa-eye"></i>
                                         </a>
                                     </td>
@@ -248,8 +248,8 @@
                                     <th>No</th>
                                     <th>Alamat Pemasangan</th>
                                     <th>Jenis Langganan</th>
-                                    <th>IP Adress</th>
-                                    
+                                    <th>IP Address</th>
+                                    <th>Ping</th>
                                     <th>Tanggal Expired</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
@@ -261,8 +261,8 @@
                                         <td>{{ $no+1 }}</td>
                                         <td>{{ $langganan->alamat_pasang }}</td>
                                         <td>{{ $langganan->layanan->nama_layanan }}</td>
-                                        <td>{{ $langganan->ip }}</td>
-                                        {{-- <td>{{ exec("ping -n 1 " . $langganan->ip, $output, $result)}}</td> --}}
+                                        <td>{{ exec("ping -n 5 $ip", $output); }}</td>
+                                        <td>{{ $langganan->IP }}</td>
                                         <td>{{ $langganan->tgl_lanjut }}</td>
                                         @if($langganan->status_id == 1)
                                             <td>
@@ -307,6 +307,9 @@
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" value="Reload Page" onClick="reload" >Ping!</button>
                     </div>
 
                 </div>

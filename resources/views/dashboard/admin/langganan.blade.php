@@ -1,4 +1,3 @@
-
 @extends('layouts.nowa',[
     'titlePage' => __('Daftar Pelanggan Aktif'),
 ])
@@ -151,7 +150,7 @@
                                             <h5>
                                                 <span class="badge badge-pill bg-danger me-1">{{ $user->status->nama_status }}</span>
                                             </h5>
-                                        </td>
+                                        </td>)
                                     @endif
                                     <td>
                                         <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal{{$user->id_user}}" data-toggle="tooltip" title="Lihat Langganan Pelanggan">
@@ -249,12 +248,11 @@
                                     <th>No</th>
                                     <th>Alamat Pemasangan</th>
                                     <th>Jenis Langganan</th>
-                                    <th>IP Adress</th>
-                                    <th>Status IP</th>
+                                    <th>IP Address</th>
+                                    <th>Ping</th>
                                     <th>Tanggal Expired</th>
                                     <th>Status</th>
                                     <th>Aksi</th>
-                                    {{-- <th>Tes Button</th> --}}
                                 </tr>
                                 </thead>
                                 <tbody style="text-align: center">
@@ -263,9 +261,8 @@
                                         <td>{{ $no+1 }}</td>
                                         <td>{{ $langganan->alamat_pasang }}</td>
                                         <td>{{ $langganan->layanan->nama_layanan }}</td>
+                                        <td>{{ exec("ping -n 5 $langganan->ip", $output, $result); }}</td>
                                         <td>{{ $langganan->ip }}</td>
-                                        <td>{{ exec("ping -n 1 " . $langganan->ip, $output, $result);}} <input type="button" value="Ping" onClick="reload"></td>
-                                        {{-- <td><button onclick= {{ exec("ping -n 1" . $langganan->ip, $output, $result) }}> ping </button></td> --}}
                                         <td>{{ $langganan->tgl_lanjut }}</td>
                                         @if($langganan->status_id == 1)
                                             <td>
@@ -310,6 +307,9 @@
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" value="Reload Page" onClick="reload" >Ping!</button>
                     </div>
 
                 </div>
