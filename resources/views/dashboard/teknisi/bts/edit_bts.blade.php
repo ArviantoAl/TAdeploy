@@ -30,7 +30,7 @@
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"><span aria-hidden="true">&times;</span></button>
                     </div>
                 @endif
-                    <form method="POST" action="{{ route('admin.posteditbts', $bts->id_bts) }}">
+                    <form method="POST" action="{{ route('teknisi.posteditbts', $bts->id_bts) }}">
                         @csrf
                         @method('PUT')
                     <div class="form-group">

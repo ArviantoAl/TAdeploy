@@ -30,7 +30,7 @@
                         <li class="menu-header">Langganan dan Invoice</li>
                         {{--daftar langganan--}}
                         @if($titlePage == 'Daftar Langganan')
-                            <li class="nav-item dropdown active">
+                            <li class="nav-item dropdown active"> </li>
                         @else
                             <li class="nav-item dropdown">
                                 @endif
@@ -85,6 +85,7 @@
                                                                 <li>
                                                                     @endif
                                                                     <a href="{{ route('pelanggan.langgananbatal') }}">Batal</a></li>
+                                                    
                                 </ul>
                             </li>
                             {{--daftar invoice--}}
@@ -138,7 +139,7 @@
                                                                     @endif
                                                                     <a href="{{ route('pelanggan.inv_batal') }}">Tidak Dibayar/Batal</a></li>
                                     </ul>
-                                </li>
+                                </li>   </li>
         </ul>
     </aside>
 </div>

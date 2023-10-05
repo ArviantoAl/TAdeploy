@@ -35,55 +35,34 @@
             </a>
         </li>
 {{--Keuangan--}}
-        <li class="slide{{ ($titlePage == 'Daftar PPN'|| $titlePage == 'Edit PPN' || $titlePage == 'Tambah PPN') ? ' is-expanded' : '' }}">
-            <a class="side-menu__item{{ ($titlePage == 'Daftar PPN'|| $titlePage == 'Edit PPN' || $titlePage == 'Tambah PPN') ? ' active' : '' }}" href="{{route('keuangan.ppn')}}">
-                <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M20.04,8.71V4H15.34L12,0.69L8.71,4H4V8.71L0.69,12L4,15.34V20.04H8.71L12,23.35L15.34,20.04H20.04V15.34L23.35,12L20.04,8.71M8.83,7.05C9.81,7.05 10.6,7.84 10.6,8.83A1.77,1.77 0 0,1 8.83,10.6C7.84,10.6 7.05,9.81 7.05,8.83C7.05,7.84 7.84,7.05 8.83,7.05M15.22,17C14.24,17 13.45,16.2 13.45,15.22A1.77,1.77 0 0,1 15.22,13.45C16.2,13.45 17,14.24 17,15.22A1.78,1.78 0 0,1 15.22,17M8.5,17.03L7,15.53L15.53,7L17.03,8.5L8.5,17.03Z"/>
-                </svg>
-                <span class="side-menu__label">Daftar PPN</span>
-            </a>
-        </li>
+<li class="slide{{ ($titlePage == 'Daftar PPN'|| $titlePage == 'Edit PPN' || $titlePage == 'Tambah PPN') ? ' is-expanded' : '' }}">
+    <a class="side-menu__item{{ ($titlePage == 'Daftar PPN'|| $titlePage == 'Edit PPN' || $titlePage == 'Tambah PPN') ? ' active' : '' }}" href="{{route('keuangan.ppn')}}">
+        <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M20.04,8.71V4H15.34L12,0.69L8.71,4H4V8.71L0.69,12L4,15.34V20.04H8.71L12,23.35L15.34,20.04H20.04V15.34L23.35,12L20.04,8.71M8.83,7.05C9.81,7.05 10.6,7.84 10.6,8.83A1.77,1.77 0 0,1 8.83,10.6C7.84,10.6 7.05,9.81 7.05,8.83C7.05,7.84 7.84,7.05 8.83,7.05M15.22,17C14.24,17 13.45,16.2 13.45,15.22A1.77,1.77 0 0,1 15.22,13.45C16.2,13.45 17,14.24 17,15.22A1.78,1.78 0 0,1 15.22,17M8.5,17.03L7,15.53L15.53,7L17.03,8.5L8.5,17.03Z"/>
+        </svg>
+        <span class="side-menu__label">Daftar PPN</span>
+    </a>
+</li>
 </li>
 {{--Pelanggan--}}
-        <li class="slide{{ $titlePage == 'Daftar Pelanggan Aktif' ? ' is-expanded' : '' }}">
-            <a class="side-menu__item{{ $titlePage == 'Daftar Pelanggan Aktif' ? ' active' : '' }}" href="{{route('keuangan.pelangganaktif')}}">
-                <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M21.1,12.5L22.5,13.91L15.97,20.5L12.5,17L13.9,15.59L15.97,17.67L21.1,12.5M10,17L13,20H3V18C3,15.79 6.58,14 11,14L12.89,14.11L10,17M11,4A4,4 0 0,1 15,8A4,4 0 0,1 11,12A4,4 0 0,1 7,8A4,4 0 0,1 11,4Z"/>
-                </svg>
-                <span class="side-menu__label">Daftar Pelanggan</span>
-            </a>
-        </li>
-{{-- pelanggan aktif --}}
-        {{-- <li class="slide{{ $titlePage == 'Daftar Pelanggan Aktif' ? ' is-expanded' : '' }}">
-            <a class="side-menu__item{{ $titlePage == 'Daftar Pelanggan Aktif' ? ' active' : '' }}" href="{{route('keuangan.pelangganaktif')}}">
-                <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M21.1,12.5L22.5,13.91L15.97,20.5L12.5,17L13.9,15.59L15.97,17.67L21.1,12.5M10,17L13,20H3V18C3,15.79 6.58,14 11,14L12.89,14.11L10,17M11,4A4,4 0 0,1 15,8A4,4 0 0,1 11,12A4,4 0 0,1 7,8A4,4 0 0,1 11,4Z"/>
-                </svg>
-                <span class="side-menu__label">Daftar Pelanggan</span>
-            </a>
-        </li> --}}
+<li class="slide{{ $titlePage == 'Daftar Pelanggan Aktif' ? ' is-expanded' : '' }}">
+    <a class="side-menu__item{{ $titlePage == 'Daftar Pelanggan Aktif' ? ' active' : '' }}" href="{{route('keuangan.pelangganaktif')}}">
+        <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M21.1,12.5L22.5,13.91L15.97,20.5L12.5,17L13.9,15.59L15.97,17.67L21.1,12.5M10,17L13,20H3V18C3,15.79 6.58,14 11,14L12.89,14.11L10,17M11,4A4,4 0 0,1 15,8A4,4 0 0,1 11,12A4,4 0 0,1 7,8A4,4 0 0,1 11,4Z"/>
+        </svg>
+        <span class="side-menu__label">Daftar Pelanggan</span>
+    </a>
+</li>
 {{--invoice--}}
-        {{-- <li class="side-item side-item-category">invoice</li>
-        <li class="slide{{ $titlePage == 'Daftar Invoice' ? ' is-expanded' : '' }}">
-            <a class="side-menu__item{{ $titlePage == 'Daftar Invoice' ? ' active' : '' }}" href="{{ route('') }}">
-                <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M3,22L4.5,20.5L6,22L7.5,20.5L9,22L10.5,20.5L12,22L13.5,20.5L15,22L16.5,20.5L18,22L19.5,20.5L21,22V2L19.5,3.5L18,2L16.5,3.5L15,2L13.5,3.5L12,2L10.5,3.5L9,2L7.5,3.5L6,2L4.5,3.5L3,2M18,9H6V7H18M18,13H6V11H18M18,17H6V15H18V17Z"/>
-                </svg>
-                <span class="side-menu__label">Daftar Invoice</span>
-            </a>
-        </li> --}}
-{{--invoice--}}
-        <li class="side-item side-item-category">invoice</li>
-        <li class="slide{{ $titlePage == 'Daftar Invoice' ? ' is-expanded' : '' }}">
-            <a class="side-menu__item{{ $titlePage == 'Daftar Invoice' ? ' active' : '' }}" href="{{ route('keuangan.invoice') }}">
-                <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M3,22L4.5,20.5L6,22L7.5,20.5L9,22L10.5,20.5L12,22L13.5,20.5L15,22L16.5,20.5L18,22L19.5,20.5L21,22V2L19.5,3.5L18,2L16.5,3.5L15,2L13.5,3.5L12,2L10.5,3.5L9,2L7.5,3.5L6,2L4.5,3.5L3,2M18,9H6V7H18M18,13H6V11H18M18,17H6V15H18V17Z"/>
-                </svg>
-                <span class="side-menu__label">Daftar Invoice</span>
-            </a>
-        </li>
-    </ul>
+<li class="side-item side-item-category">invoice</li>
+<li class="slide{{ $titlePage == 'Daftar Invoice' ? ' is-expanded' : '' }}">
+    <a class="side-menu__item{{ $titlePage == 'Daftar Invoice' ? ' active' : '' }}" href="{{ route('keuangan.invoice') }}">
+        <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
+            <path d="M3,22L4.5,20.5L6,22L7.5,20.5L9,22L10.5,20.5L12,22L13.5,20.5L15,22L16.5,20.5L18,22L19.5,20.5L21,22V2L19.5,3.5L18,2L16.5,3.5L15,2L13.5,3.5L12,2L10.5,3.5L9,2L7.5,3.5L6,2L4.5,3.5L3,2M18,9H6V7H18M18,13H6V11H18M18,17H6V15H18V17Z"/>
+        </svg>
+        <span class="side-menu__label">Daftar Invoice</span>
+    </a>
+</li>
+</ul>
 </aside>
-</div>
-</div>
 </div>

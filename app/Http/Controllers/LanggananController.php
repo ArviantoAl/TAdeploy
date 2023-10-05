@@ -88,4 +88,16 @@ class LanggananController extends Controller
 
         return view('dashboard.admin.langganan', compact('langganans'));
     }
+
+    public function teknisi_langganan_index(){
+        $langganans = Langganan::query()->paginate(10);
+
+        return view('dashboard.teknisi.langganan', compact('langganans'));
+    }
+
+    public function keuangan_langganan_index(){
+        $langganans = Langganan::query()->paginate(10);
+
+        return view('dashboard.keuangan.langganan', compact('langganans'));
+    }
 }

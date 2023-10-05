@@ -30,19 +30,20 @@
                         <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"><span aria-hidden="true">&times;</span></button>
                     </div>
                 @endif
-                <form method="POST" action="{{ route('teknisi.postbts') }}">
+                <form method="POST" action="{{ route('teknisi.posttambahbts') }}">
                     @csrf
-                    @if ($item1->name = null)
+                    @method('GET')
+                    {{-- @if ($item1->name = 0)
                         <div class="form-group">
                             <label for="nama" class="form-label">Nama Perangkat</label>
                             <input class="form-control" id="nama" name="nama" placeholder="Masukkan Nama Perangkat" type="text" required autocomplete="nama" autofocus>
                         </div> 
-                    @else
+                    @else --}}
                         <div class="form-group">
                             <label for="nama" class="form-label">Nama Perangkat</label>
-                            <input class="form-control" id="nama" value="{{ $item1 ['name'] }}" name="nama" placeholder="Masukkan Nama Perangkat" type="text" required autocomplete="nama" autofocus>
+                            <input class="form-control" id="nama" value="{{ $item1 ['name'] ?? '' }}" name="nama" placeholder="Masukkan Nama Perangkat" type="text" required autocomplete="nama" autofocus>
                         </div>
-                    @endif
+                    {{-- @endif --}}
                     <div class="row">
                         <div class="form-group col-6">
                             <label for="lokasi" class="form-label">Lokasi BTS</label>
@@ -56,11 +57,12 @@
                         <div class="form-group col-6">
                             <label for="jenis" class="form-label">Jenis BTS</label>
                             <select name="jenis" id="jenis" class="form-control form-select select2" data-bs-placeholder="Pilih Jenis BTS" required>
-                                <option value="0">Pilih Lokasi BTS</option>
+                                <option value="0">Pilih Jenis BTS</option>
                                 @foreach ($jeniss as $j)
-                                    <option value="{{ $j->id_jenis }}">{{ $j->nama_perangkat }}</option>
+                                    <option value="{{ $j->id_jenis}}">{{ $j->nama_perangkat }}</option>
                                 @endforeach
                             </select>
+                            {{-- <input class="form-control" id="jenis" name="jenis" placeholder="Masukkan jenis" type="text" required autocomplete="jenis" autofocus value="{{ $jeniss->id_jenis=3 }}">{{ $jeniss->nama_perangkat }}> --}}
                         </div>
                     </div>
                     <div class="row">
@@ -73,34 +75,36 @@
                                 @endforeach
                             </select>
                         </div>
+                        {{-- @if ($item1->frequency = 0)
+                            <div class="form-group">
+                                <label for="frekuensi" class="form-label">frekuensi</label>
+                                <input class="form-control" id="frekuensi" name="frekuensi" placeholder="Masukkan frekuensi Perangkat" type="text" required autocomplete="frekuensi" autofocus>
+                            </div> 
+                        @else --}}
                         <div class="form-group col-6">
                             <label for="frekuensi" class="form-label">Frekuensi</label>
-                            <input class="form-control" id="frekuensi"  name="frekuensi" placeholder="Masukkan Frekuensi" type="number" required autocomplete="frekuensi" autofocus>
+                            <input class="form-control" id="frekuensi" value="{{ $item3 ['frequency'] ?? '' }}"  name="frekuensi" placeholder="Masukkan Frekuensi" type="number" required autocomplete="frekuensi" autofocus>
                         </div>
+                        {{-- @endif --}}
                     </div>
                     <div class="row">
-                        @if ($item3->SSID = null)
+                        {{-- @if ($item1->ssid = 0)
+                            <div class="form-group">
+                                <label for="ssid" class="form-label">SSID</label>
+                                <input class="form-control" id="ssid" name="ssid" placeholder="Masukkan ssid Perangkat" type="text" required autocomplete="ssid" autofocus>
+                            </div> 
+                        @else --}}
                             <div class="form-group col-6">
                                 <label for="ssid" class="form-label">SSID</label>
-                                <input class="form-control" id="ssid" name="ssid" placeholder="Masukkan SSID" type="text" required autocomplete="ssid" autofocus>
+                                <input class="form-control" id="ssid" value="{{ $item3 ['ssid'] ?? '' }}" name="ssid" placeholder="Masukkan SSID" type="text" required autocomplete="ssid" autofocus>
                             </div>    
-                        @else
-                            <div class="form-group col-6">
-                                <label for="ssid" class="form-label">SSID</label>
-                                <input class="form-control" id="ssid" value="{{ $item3 ['SSID'] }}" name="ssid" placeholder="Masukkan SSID" type="text" required autocomplete="ssid" autofocus>
-                            </div>    
-                        @endif
-                        @if ($item2->address = null)
+                        {{-- @endif --}}
+                        
                             <div class="form-group">
                                 <label for="ip" class="form-label">IP Address</label>
-                                <input class="form-control" id="ip" name="ip"  type="text" required autocomplete="ip" autofocus>
+                                <input class="form-control" id="ip" value="{{ $item2 ['address'] ?? ''}}" name="ip"  type="text" required autocomplete="ip" autofocus>
                             </div>    
-                        @else
-                            <div class="form-group">
-                                <label for="ip" class="form-label">IP Address</label>
-                                <input class="form-control" id="ip" value="{{ $item2 ['address'] }}" name="ip"  type="text" required autocomplete="ip" autofocus>
-                            </div>    
-                        @endif
+                        
                     </div>
                     {{-- {{ dd($response) }} --}}
                     <button type="submit" class="btn btn-primary mt-3 mb-0">Create</button>

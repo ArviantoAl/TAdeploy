@@ -120,15 +120,15 @@ class PemesananController extends Controller
             $nama_role = 'Pelanggan';
             $user->save();
 
-//            $data_ambil = [
-//                'nama' => $name,
-//                'nama_role' => $nama_role,
-//                'username' => $username,
-//                'email' => $email,
-//                'password' => $username,
-//            ];
-//
-//            Mail::to($email)->send(new MailAdmins($data_ambil));
+           $data_ambil = [
+               'nama' => $name,
+               'nama_role' => $nama_role,
+               'username' => $username,
+               'email' => $email,
+               'password' => $username,
+           ];
+
+           Mail::to($email)->send(new MailAdmins($data_ambil));
 
             $detail_alamat = $request->id_alamat;
             $lokasi = $request->lokasi;
@@ -263,31 +263,32 @@ class PemesananController extends Controller
                 ->where('status_id', '=', 6)
                 ->get();
 
-//            $cv = ProfilCv::query()->find(1);
-//            $data_ambil = [
-//                'status' => 6,
-//                'email_cv' => $cv->email_cv,
-//                'nama_cv' => $cv->nama_cv,
-//                'alamat' => $cv->alamat,
-//                'no_hp' => $cv->no_hp,
-//                'nama_pelanggan' => $name,
-//                'email_pelanggan' => $email,
-//                'no_hp_pelanggan' => $username,
-//                'id_invoice' => $id_invoice,
-//                'tgl_terbit' => $tgl_terbit,
-//                'tgl_tempo' => $tgl_tempo,
-//                'harga_bayar' => $harga2,
-//                'langganans' => $langganans,
-//                'subtotal' => $harga,
-//                'ppn' => $getppn2,
-//                'hargappn' => $hargappn,
-//                'bank' => $bank,
-//            ];
-//
-//            Mail::to($email)->send(new Invoices($data_ambil));
+           $cv = ProfilCv::query()->find(1);
+           $data_ambil = [
+               'status' => 6,
+               'email_cv' => $cv->email_cv,
+               'nama_cv' => $cv->nama_cv,
+               'alamat' => $cv->alamat,
+               'no_hp' => $cv->no_hp,
+               'nama_pelanggan' => $name,
+               'email_pelanggan' => $email,
+               'no_hp_pelanggan' => $username,
+               'id_invoice' => $id_invoice,
+               'tgl_terbit' => $tgl_terbit,
+               'tgl_tempo' => $tgl_tempo,
+               'harga_bayar' => $harga2,
+               'langganans' => $langganans,
+               'subtotal' => $harga,
+               'ppn' => $getppn2,
+               'hargappn' => $hargappn,
+               'bank' => $bank,
+           ];
+
+           Mail::to($email)->send(new Invoices($data_ambil));
 
             return redirect()->route('admin.invoice')
                 ->with('success','Invoice Terkirim.');
+                
         }
     }
 
@@ -883,6 +884,20 @@ class PemesananController extends Controller
         return view('dashboard.admin.pemesanan.edit', compact('get_lang', 'lokasi_id','lokasi', 'user', 'layanan', 'provinsi'));
     }
 
+    public function keuangan_edit_langganan($id_langganan){
+        $get_lang = Langganan::query()->find($id_langganan);
+        $pelanggan_id = $get_lang->pelanggan_id;
+        $bts_id = $get_lang->bts_id;
+        $layanan = Layanan::all();
+        $provinsi =Province::all();
+        $user = User::query()->find($pelanggan_id);
+        $lokasi = MasterBts::all();
+        $getbts = Bts::query()->find($bts_id);
+        $lokasi_id = $getbts->lokasi_id;
+        $bts = Bts::query()->where('lokasi_id','=',$lokasi_id)->get();
+        return view('dashboard.keuangan.pemesanan.edit', compact('get_lang', 'lokasi_id','lokasi', 'user', 'layanan', 'provinsi'));
+    }
+
     public function postedit_langganan(Request $request){
         $idlang = $request->id;
         $layanan = $request->id_layanan;
@@ -1135,4 +1150,22 @@ class PemesananController extends Controller
         }
         echo $option;
     }
+
+    // public function teknisi_form_lama($id_user){
+    //     $user = User::query()->find($id_user);
+    //     $layanan = Layanan::query()->where('status_id', '=', 3)->get();
+    //     $provinsi = Province::all();
+    //     $lokasi = MasterBts::all();
+    //     $bts = Bts::query()->where('status_id', '=', 3)->get();
+    //     return view('dashboard.teknisi.pemesanan.tambah', compact('user', 'layanan', 'provinsi', 'lokasi'));
+    // }
+
+    // public function keuangan_form_lama($id_user){
+    //     $user = User::query()->find($id_user);
+    //     $layanan = Layanan::query()->where('status_id', '=', 3)->get();
+    //     $provinsi = Province::all();
+    //     $lokasi = MasterBts::all();
+    //     $bts = Bts::query()->where('status_id', '=', 3)->get();
+    //     return view('dashboard.admin.pemesanan.tambah', compact('user', 'layanan', 'provinsi', 'lokasi'));
+    // }
 }

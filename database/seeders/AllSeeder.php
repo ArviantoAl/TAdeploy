@@ -164,6 +164,9 @@ class AllSeeder extends Seeder
             [
                 'nama_perangkat' => 'cisa',
             ],
+            [
+                'nama_perangkat' => 'Mikrotik',
+            ],
         ];
         DB::table('jenis_bts')->insert($jenis);
 
@@ -280,5 +283,17 @@ class AllSeeder extends Seeder
                 'password' => 'admin',
             ]];
         DB::table('master_mikrotik')->insert($master_mikrotik);
-    }
+    
+
+    //        3
+    $reason= [
+        [
+            'nama_reason' => 'pindah tangan',
+        ],
+        [
+            'nama_reason' => 'expired',
+        ],
+    ];
+    DB::table('reason')->insert($reason);
+}
 }

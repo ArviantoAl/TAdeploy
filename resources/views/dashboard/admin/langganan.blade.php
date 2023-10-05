@@ -53,6 +53,14 @@
                     <div class="form-group col-md-3">
                         <input type="search" name="search" id="search" class="form-control" placeholder="Search...">
                     </div>
+                    {{-- <div class="form-group col-md-1">
+                        <label for="filter">Start date : </label>
+                        <input type="date" id="start_date" name="start_date" class="form-control">
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label for="filter">End date : </label>
+                        <input type="date" id="end_date" name="end_date" class="form-control">
+                    </div> --}}
                     <div class="form-group col-md-1">
                         <button type="submit" class="btn btn-primary btn-block">search</button>
                     </div>
@@ -261,8 +269,8 @@
                                         <td>{{ $no+1 }}</td>
                                         <td>{{ $langganan->alamat_pasang }}</td>
                                         <td>{{ $langganan->layanan->nama_layanan }}</td>
-                                        <td>{{ exec("ping -n 5 $langganan->ip", $output, $result); }}</td>
                                         <td>{{ $langganan->ip }}</td>
+                                        <td>{{ exec("ping -n 1 $langganan->ip", $output, $result); }}</td>
                                         <td>{{ $langganan->tgl_lanjut }}</td>
                                         @if($langganan->status_id == 1)
                                             <td>
@@ -307,9 +315,7 @@
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" value="Reload Page" onClick="reload" >Ping!</button>
+                        <button type="button" class="btn btn-danger" value="Reload Page" onClick='window.location.reload();' >Ping!</button>
                     </div>
 
                 </div>

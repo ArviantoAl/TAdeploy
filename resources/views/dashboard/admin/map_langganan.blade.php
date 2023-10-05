@@ -2,7 +2,12 @@
     'titlePage' => __('Peta Langganan'),
 ])
 
+<head><link rel="stylesheet" href="../fontawesome/css/all.css"></head>
+
+
 @section('content')
+<body>
+    
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
@@ -25,7 +30,16 @@
                         With Popup
                     </div>
                     <p class="mg-b-20">Popups are usually used when you want to attach some information to a map.</p>
+                    
                     <div class="ht-500" id="leaflet2"></div>
+                </div>
+                <div class="card-body">
+                    <div class="main-content-label mg-b-5">
+                    <h5><strong>Legends :</strong></h5>
+                    <h6><i class="fa-solid fa-location-dot" style="color: #24d800;"></i> : pelanggan </h6>   
+                    <h6><i class="fa-solid fa-location-dot" style="color: #b5d400;"></i> : BTS</h6>   
+                    <h6><i class="fa-solid fa-location-dot" style="color: #0053ec;"></i> : CV </h6>   
+                    </div>
                 </div>
             </div>
         </div>
@@ -35,6 +49,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js"></script>
     <!--Internal  Leaflet-maps js -->
     <script src="{{ asset('nowa_assets') }}/plugins/leaflet/leaflet.js"></script>
+
+
 
     <script>
         let cv = JSON.parse('{!! json_encode($cv) !!}');
@@ -66,10 +82,15 @@
             shadowSize: [41, 41]
         });
 
+
+
         var map = L.map('leaflet2').setView([cv.latitude, cv.longitude], 10);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
+
+        // layerControl.addBaseLayer(map, "map");
+
         for (var i = 0; i < lang.length; i++){
             L.marker([lang[i]['latitude'],lang[i]['longitude']], {icon: greenIcon}).addTo(map)
                 .bindPopup('Nama Pelanggan: '+lang[i]['nama']+
@@ -92,8 +113,16 @@
             )
             .openPopup();
 
+        var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
+        var baseMaps = {
+            "<span style='color: gray'>Grayscale</span>": grayscale,
+            "Streets": streets
+        };
+
+        L.layerControl.addTo(map);
         // L.marker([-7.7246776, 110.9562274]).addTo(map)
         //     .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
         //     .openPopup();
     </script>
+    </body>
 @endsection

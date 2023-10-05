@@ -33,7 +33,7 @@ class TestingController extends Controller
         // return dd($response);
         
         return view('dashboard.teknisi.bts.testing', compact('response'));
-            }
+        }
         
          public function loginwb(){
                 $master_mikrotik = MasterMikrotik::all();
@@ -42,6 +42,7 @@ class TestingController extends Controller
             }   
 
         public function submitlogin (Request $request){
+            $master_mikrotik = MasterMikrotik::all();
             $client = new Client([
                 'host' => $request->ip,
                 'user' => $request->Uname,
@@ -60,37 +61,44 @@ class TestingController extends Controller
             $response2 = $client->query($query2)->read();
             $item2 = $response2[0];
             // return dd($response2);
-            // $query3 = (new Query('/interface/wireless/print'));
-            // // Send query and read response from RouterOS
-            // $response3 = $client->query($query3)->read();
-            // $item3 = $response3[0];
-            // // return dd($response2);
+            $query3 = (new Query('/interface/wireless/print'));
+            // Send query and read response from RouterOS
+            $response3 = $client->query($query3)->read();
+            $item3 = $response3[0];
+            // return dd($response3);
             
 
             // dadikne 1
             $item = (object) [
                 'item1' => $item1,
                 'item2' => $item2,
-                // 'item3' => $item3
+                'item3' => $item3
             ];
             
             $bts = new Bts();
             $lokasis = MasterBts::all();
             $jeniss = JenisBts::all();
             $kategoris = Kategori::all();
+            
 
-            return view('dashboard.teknisi.bts.tambah_bts', compact('item2','item1','bts','lokasis', 'jeniss', 'kategoris'));
+            return view('dashboard.teknisi.bts.tambah_bts', compact('master_mikrotik','item3','item2','item1','bts','lokasis', 'jeniss', 'kategoris'));
             }
 
-            public function teknisi_edit_mikrotikbts($request, $id_bts){
-                $bts = Bts::find($id_bts);
-                $lokasis = MasterBts::all();
-                $jeniss = JenisBts::all();
-                $kategoris = Kategori::all();
+            
+            public function logineditmk($id_bts){
+
+                    $bts = Bts::find($id_bts);
+                    $master_mikrotik = MasterMikrotik::all();
+
+
+                    return view('dashboard.teknisi.bts.edit_login_bts', compact('master_mikrotik','bts'));
+            }   
+
+            public function submitloginedit (Request $request, $id_bts){
                 $client = new Client([
                     'host' => $request->ip,
-                    'user' => 'admin',
-                    'pass' => 'admin',
+                    'user' => $request->Uname,
+                    'pass' => $request->pw,
                     'port' => 8728,
                 ]);
 
@@ -105,24 +113,29 @@ class TestingController extends Controller
                 $response2 = $client->query($query2)->read();
                 $item2 = $response2[0];
                 // return dd($response2);
-                // $query3 = (new Query('/interface/wireless/print'));
-                // // Send query and read response from RouterOS
-                // $response3 = $client->query($query3)->read();
-                // $item3 = $response3[0];
-                // // return dd($response2);
+                $query3 = (new Query('/interface/wireless/print'));
+                // Send query and read response from RouterOS
+                $response3 = $client->query($query3)->read();
+                $item3 = $response3[0];
+                // return dd($response3);
                 
 
-                // dadikne 1
+                // jadi 1
                 $item = (object) [
                     'item1' => $item1,
                     'item2' => $item2,
-                    // 'item3' => $item3
+                    'item3' => $item3
                 ];
-        
-                return view('dashboard.teknisi.bts.edit_mikrotikbts', compact('item2','item1','bts','lokasis', 'jeniss', 'kategoris'));
+
+                $bts = Bts::find($id_bts);
+                $lokasis = MasterBts::all();
+                $jeniss = JenisBts::all();
+                $kategoris = Kategori::all();
+
+                return view('dashboard.teknisi.bts.edit_mikrotikbts', compact('item2','item3','item1','bts','lokasis', 'jeniss', 'kategoris'));
             }
-        
-            public function teknisi_post_edit_bts(Request $request ,$id_bts){
+
+                public function teknisi_post_edit_mikrotik_bts(Request $request ,$id_bts){
                 $nama = $request->nama;
                 $lokasi_id = $request->lokasi;
                 $jenis_id = $request->jenis;
@@ -130,6 +143,8 @@ class TestingController extends Controller
                 $frekuensi = $request->frekuensi;
                 $ssid = $request->ssid;
                 $ip = $request->ip;
+
+                
         
                 if ($jenis_id == 0){
                     return redirect()->back()

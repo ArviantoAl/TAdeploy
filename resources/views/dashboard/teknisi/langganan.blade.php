@@ -1,157 +1,3 @@
-{{-- @extends('layouts.app',[
-    'titlePage' => __('Daftar Langganan'),
-    'sub' => $header
-])
-
-@section('content')
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-12">
-            <div class="card">
-                <div class="card-header">
-                    <h4>{{ $header }}</h4>
-                </div>
-
-                <div class="card-body">
-                    <div class="table-responsive">
-                        @if(count($langganans)==0)
-                            <p>Tidak ada data</p>
-                        @elseif(count($langganans)>0)
-                            <table class="table table-bordered table-md">
-                                <thead>
-                                <th>No</th>
-                                <th>Nama Pelanggan</th>
-                                <th>Alamat Pemasangan</th>
-                                <th>Jenis Langganan</th>
-                                <th>Tanggal Expired</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                                </thead>
-                                <tbody>
-                                @foreach ($langganans as $no => $langganan)
-                                    <tr>
-                                        <td>{{ $no+1 }}</td>
-                                        <td>{{ $langganan->pelanggan->name }}</td>
-                                        <td>{{ $langganan->alamat_pasang }}</td>
-                                        <td>{{ $langganan->layanan->nama_layanan }}</td>
-                                        <td>{{ $langganan->tgl_lanjut }}</td>
-                                        @if($langganan->status == 0)
-                                            <td><div class="badge badge-info">Langganan Baru</div></td>
-                                        @elseif($langganan->status == 1)
-                                            <td><div class="badge badge-danger">Langganan Dibatalkan</div></td>
-                                        @elseif($langganan->status == 2)
-                                            <td><div class="badge badge-warning">Langganan Disetujui</div></td>
-                                        @elseif($langganan->status == 3)
-                                            <td><div class="badge badge-warning">Menunggu pembayaran</div></td>
-                                        @elseif($langganan->status == 4)
-                                            @if($today >= $langganan->tgl_lanjut)
-                                                <td><div class="badge badge-danger">Langganan Kadaluarsa</div></td>
-                                            @else
-                                                <td><div class="badge badge-success">Langganan Aktif</div></td>
-                                            @endif
-                                        @endif
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection --}}
-
-{{-- @extends('layouts.nowa',[
-    'titlePage' => __('Daftar Langganan'),
-])
-
-@section('content')
-    <!-- breadcrumb -->
-    <div class="breadcrumb-header justify-content-between">
-        <div class="left-content">
-            <span class="main-content-title mg-b-0 mg-b-lg-1">Daftar Langganan</span>
-        </div>
-        <div class="justify-content-center mt-2">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item tx-15"><a href="javascript:void(0);">Data Layanan</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Daftar Layanan</li>
-            </ol>
-        </div>
-    </div>
-    <!-- /breadcrumb -->
-
-    <!-- Row -->
-    <div class="row row-sm">
-        <div class="col-lg-12">
-            <div class="card custom-card overflow-hidden">
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped mg-b-0 text-md-nowrap">
-                            <thead style="text-align: center">
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Pelanggan</th>
-                                <th>Alamat Pemasangan</th>
-                                <th>Jenis Langganan</th>
-                                <th>Tanggal Expired</th>
-                                <th>Status</th>
-                                <th>Aksi</th>
-                            </tr>
-                            </thead>
-                            <tbody style="text-align: center">
-                            @foreach ($langganans as $no => $langganan)
-                                <tr>
-                                    <td>{{ $no+1 }}</td>
-                                    <td>{{ $langganan->pelanggan->name }}</td>
-                                    <td>{{ $langganan->alamat_pasang }}</td>
-                                    <td>{{ $langganan->layanan->nama_layanan }}</td>
-                                    <td>{{ $langganan->tgl_lanjut }}</td>
-                                    @if($langganan->status_id == 1)
-                                        <td>
-                                            <h5>
-                                                <span class="badge badge-pill bg-primary me-1">{{ $langganan->status->nama_status }}</span>
-                                            </h5>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-success" href="{{ route('admin.approvelangganan', $langganan->id_langganan) }}" data-toggle="tooltip" title="Approve">
-                                                <i class="fa fa-check"></i>
-                                            </a>
-                                            <a class="btn btn-danger" href="{{ route('admin.rejectlangganan', $langganan->id_langganan) }}" data-toggle="tooltip" title="Batal">
-                                                <i class="fa fa-ban"></i>
-                                            </a>
-                                        </td>
-                                    @elseif($langganan->status_id == 2 || $langganan->status_id == 10)
-                                        <td>
-                                            <h5>
-                                                <span class="badge badge-pill bg-warning me-1">{{ $langganan->status->nama_status }}</span>
-                                            </h5>
-                                        </td>
-                                    @elseif($langganan->status_id == 3)
-                                        <td>
-                                            <h5>
-                                                <span class="badge badge-pill bg-success me-1">{{ $langganan->status->nama_status }}</span>
-                                            </h5>
-                                        </td>
-                                    @elseif($langganan->status_id == 4 || $langganan->status_id == 5)
-                                        <td>
-                                            <h5>
-                                                <span class="badge badge-pill bg-danger me-1">{{ $langganan->status->nama_status }}</span>
-                                            </h5>
-                                        </td>
-                                    @endif
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        {{ $langganans->links() }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection --}}
-
-
 @extends('layouts.nowa',[
     'titlePage' => __('Daftar Pelanggan Aktif'),
 ])
@@ -175,7 +21,7 @@
     <div class="row row-sm">
         <div class="col-lg-12">
             @if($terakhir == $bulan)
-                <form action="{{ route('admin.kirimsemua') }}" method="POST">
+                <form action="{{ route('teknisi.kirimsemua') }}" method="POST">
                     @csrf
                     <div class="row row-xs">
                         <div class="col-md-4">
@@ -193,7 +39,7 @@
                 </form>
             @endif
 
-            <form action="{{ route('admin.pelangganaktif') }}" method="GET">
+            <form action="{{ route('teknisi.pelangganaktif') }}" method="GET">
                 <div class="row row-xs">
                     <div class="form-group col-md-2">
                         <select name="status" id="status" class="form-control form-select select2" data-placeholder="Filter status">
@@ -258,7 +104,7 @@
                                             </h5>
                                         </td>
                                         <td>
-                                            <a class="btn btn-success" href="{{ route('admin.approvepelanggan', $user->id_user) }}" data-toggle="tooltip" title="Approve">
+                                            <a class="btn btn-success" href="{{ route('teknisi.approvepelanggan', $user->id_user) }}" data-toggle="tooltip" title="Approve">
                                                 <i class="fa fa-check"></i>
                                             </a>
                                         </td>
@@ -269,12 +115,12 @@
                                             </h5>
                                         </td>
                                         <td>
-                                            <a class="btn btn-warning" href="{{ route('admin.form_lama', $user->id_user) }}" data-toggle="tooltip" title="Tambah Langganan">
+                                            <a class="btn btn-warning" href="{{ route('teknisi.form_lama', $user->id_user) }}" data-toggle="tooltip" title="Tambah Langganan">
                                                 <i class="fa fa-plus"></i>
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-warning" href="{{ route('admin.edituser', $user->id_user) }}" data-toggle="tooltip" title="Edit">
+                                            <a class="btn btn-warning" href="{{ route('teknisi.edituser', $user->id_user) }}" data-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         </td>
@@ -284,18 +130,18 @@
                                                 <span class="badge badge-pill bg-success me-1">{{ $user->status->nama_status }}</span>
                                             </h5>
                                         </td>
-                                        <td>
-                                            <a class="btn btn-warning" href="{{ route('admin.form_lama', $user->id_user) }}" data-toggle="tooltip" title="Tambah Langganan">
+                                        {{-- <td>
+                                            <a class="btn btn-warning" href="{{ route('teknisi.form_lama', $user->id_user) }}" data-toggle="tooltip" title="Tambah Langganan">
                                                 <i class="fa fa-plus"></i>
                                             </a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-warning" href="{{ route('admin.edituser', $user->id_user) }}" data-toggle="tooltip" title="Edit">
+                                            <a class="btn btn-warning" href="{{ route('teknisi.edituser', $user->id_user) }}" data-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                        </td>
+                                        </td> --}}
                                         <td>
-                                            <a class="btn btn-danger" href="{{ route('admin.nonaktif_pelanggan', $user->id_user) }}" data-toggle="tooltip" title="Nonaktif Pelanggan">
+                                            <a class="btn btn-danger" href="{{ route('teknisi.nonaktif_pelanggan', $user->id_user) }}" data-toggle="tooltip" title="Nonaktif Pelanggan">
                                                 <i class="fa fa-ban"></i>
                                             </a>
                                         </td>
@@ -312,7 +158,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-success" href="{{ route('admin.printpel', $user->id_user) }}" data-toggle="tooltip" title="Cetak">
+                                        <a class="btn btn-success" href="{{ route('teknisi.printpel', $user->id_user) }}" data-toggle="tooltip" title="Cetak">
                                             <i class="fa fa-print"></i>
                                         </a>
                                     </td>
@@ -339,7 +185,7 @@
             // console.log(user_id);
             $.ajax({
                 type: "GET",
-                url: "{{route('admin.changeppn')}}",
+                url: "{{route('teknisi.changeppn')}}",
                 data: {
                     id_user: user_id,
                     ppn_id: ppn_id,
@@ -362,7 +208,7 @@
             var ppn_flag = $(this).prop('checked') === true ? 1 : 0;
             $.ajax({
                 type: "GET",
-                url: "{{route('admin.selectallppn')}}",
+                url: "{{route('teknisi.selectallppn')}}",
                 data: {
                     ppn_flag: ppn_flag,
                 },
@@ -418,8 +264,6 @@
                                         <td>{{ $langganan->layanan->nama_layanan }}</td>
                                         <td>{{ $langganan->ip }}</td>
                                         <td >{{ exec("ping -n 1 " . $langganan->ip, dd($output), dd($result));}} </td>
-                                        <td >{{ exec("ping -n 1 " . $langganan->ip, dd($output), dd($result));}} </td>
-                                        {{-- <td><button onclick= {{ exec("ping -n 1" . $langganan->ip, $output, $result) }}> ping </button></td> --}}
                                         <td>{{ $langganan->tgl_lanjut }}</td>
                                         @if($langganan->status_id == 1)
                                             <td>
@@ -440,12 +284,12 @@
                                                 </h5>
                                             </td>
                                             <td>
-                                                <a class="btn btn-warning" href="{{ route('admin.edit_langganan', $langganan->id_langganan) }}" data-toggle="tooltip" title="Edit Langganan">
+                                                {{-- <a class="btn btn-warning" href="{{ route('teknisi.edit_langganan', $langganan->id_langganan) }}" data-toggle="tooltip" title="Edit Langganan">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a class="btn btn-danger" href="{{ route('admin.nonaktif_langganan', $langganan->id_langganan) }}" data-toggle="tooltip" title="Nonaktif Langganan">
+                                                <a class="btn btn-danger" href="{{ route('teknisi.nonaktif_langganan', $langganan->id_langganan) }}" data-toggle="tooltip" title="Nonaktif Langganan">
                                                     <i class="fa fa-ban"></i>
-                                                </a>
+                                                </a> --}}
                                             </td>
                                         @elseif($langganan->status_id == 4 || $langganan->status_id == 5)
                                             <td>
@@ -456,7 +300,6 @@
                                         @endif
                                     </tr>
                                 @endforeach
-                                <td> <input type="button" value="Reload Page" onClick="reload"> </td>
                                 </tbody>
                             </table>
                         </div>

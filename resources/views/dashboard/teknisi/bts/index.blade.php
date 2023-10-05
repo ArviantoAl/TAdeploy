@@ -66,11 +66,20 @@
                                                 <span class="badge badge-pill bg-success me-1">{{ $bts->status->nama_status }}</span>
                                             </h5>
                                         </td>
-                                        <td>
-                                            <a class="btn btn-warning" href="{{ route('admin.editbts', $bts->id_bts) }}" data-toggle="tooltip" title="Edit">
+                                        @if($bts->jenis_id == 4)
+                                            <td>
+                                            <a class="btn btn-warning" href="{{ route('teknisi.geteditloginbts', $bts->id_bts) }}" data-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                        </td><td>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <a class="btn btn-warning" href="{{ route('teknisi.editbts', $bts->id_bts) }}" data-toggle="tooltip" title="Edit">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                            </td>
+                                        @endif
+                                        <td>
                                             <a class="btn btn-danger" href="{{ route('admin.nonaktifbts', $bts->id_bts) }}" data-toggle="tooltip" title="Nonaktif">
                                                 <i class="fa fa-ban"></i>
                                             </a>

@@ -1,256 +1,257 @@
 @extends('layouts.nowa',[
-    'titlePage' => __('Dashboard Keangan'),
+    'titlePage' => __('Dashboard Keuangan'),
 ])
 
 @section('content')
     <!-- breadcrumb -->
     <div class="breadcrumb-header justify-content-between">
         <div class="left-content">
-            <span class="main-content-title mg-b-0 mg-b-lg-1">Dashboard Keangan</span>
+            <span class="main-content-title mg-b-0 mg-b-lg-1">Dashboard keuangan</span>
         </div>
         <div class="justify-content-center mt-2">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active" aria-current="page">Dashboard Keangan</li>
+                <li class="breadcrumb-item active" aria-current="page">Dashboard keuangan</li>
             </ol>
         </div>
     </div>
-    <!-- /breadcrumb -->
+<!-- /breadcrumb -->
 
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Anda adalah Keuangan</strong>
-        <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"><span aria-hidden="true">&times;</span></button>
-    </div>
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-        <form>
-            <div class="row row-xs">
-                <div class="form-group col-md-1">
-                    <select name="bulan" id="bulan" class="form-control form-select select2" data-placeholder="Filter Bulan">
-                        @foreach ($bulan as $key => $b)
-                            <option value="{{ $vabulan[$key] }}" {{ $vabulan[$key] == $selected ? 'selected' : '' }}>{{$b}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-1">
-                    <select name="tahun" id="tahun" class="form-control form-select select2" data-placeholder="Filter Bulan">
-                        @foreach ($tahun as $key => $t)
-                            <option value="{{ $t }}" {{ $t == $selected2 ? 'selected' : '' }}>{{$t}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-1">
-                    <button type="button" id="export" class="btn btn-primary btn-block">Export Filter</button>
-                </div>
-                <div class="form-group col-md-1">
-                    <button type="button" id="export2" class="btn btn-primary btn-block">Export Semua</button>
-                </div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Anda adalah keuangan</strong>
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" type="button"><span aria-hidden="true">&times;</span></button>
+</div>
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+    <form>
+        <div class="row row-xs">
+            <div class="form-group col-md-1">
+                <select name="bulan" id="bulan" class="form-control form-select select2" data-placeholder="Filter Bulan">
+                    @foreach ($bulan as $key => $b)
+                        <option value="{{ $vabulan[$key] }}" {{ $vabulan[$key] == $selected ? 'selected' : '' }}>{{$b}}</option>
+                    @endforeach
+                </select>
             </div>
-        </form>
-        <!-- <div class="container"> -->
-        <!-- row -->
-        <div class="row row-sm">
-            <div class="col-sm-12 col-md-12">
-                <div class="card overflow-hidden">
-                    <div class="card-body">
-                        <div class="main-content-label mg-b-5">
-                            Line Chart
-                        </div>
-                        <p class="mg-b-20">Basic Charts Of Nowa template.</p>
-                        <div class="chartjs-wrapper-demo" id="chart">
-                            <canvas id="chartLine111"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- col-6 -->
+            <div class="form-group col-md-1">
+                <select name="tahun" id="tahun" class="form-control form-select select2" data-placeholder="Filter Bulan">
+                    @foreach ($tahun as $key => $t)
+                        <option value="{{ $t }}" {{ $t == $selected2 ? 'selected' : '' }}>{{$t}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group col-md-1">
+                <button type="button" id="export" class="btn btn-primary btn-block">Export Filter</button>
+            </div>
+            <div class="form-group col-md-1">
+                <button type="button" id="export2" class="btn btn-primary btn-block">Export Semua</button>
+            </div>
         </div>
-        <!-- /row -->
-        <div class="row">
-            <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
-                <div class="card sales-card circle-image1">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="ps-4 pt-4 pe-3 pb-4">
-                                <div class="">
-                                    <h6 class="mb-2 tx-12 ">Jumlah Invoice</h6>
-                                </div>
-                                <div class="pb-0 mt-0">
-                                    <div class="d-flex">
-                                        <h4 id="ainv" class="tx-20 font-weight-semibold mb-2"></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="circle-icon bg-info-transparent text-center align-self-center overflow-hidden">
-                                <i class="fa fa-file-invoice tx-16 text-info"></i>
-                            </div>
-                        </div>
+    </form>
+    <!-- <div class="container"> -->
+    <!-- row -->
+    <div class="row row-sm">
+        <div class="col-sm-12 col-md-12">
+            <div class="card overflow-hidden">
+                <div class="card-body">
+                    <div class="main-content-label mg-b-5">
+                        Line Chart
+                    </div>
+                    <p class="mg-b-20">Basic Charts Of Nowa template.</p>
+                    <div class="chartjs-wrapper-demo" id="chart">
+                        <canvas id="chartLine111"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
-                <div class="card sales-card circle-image2">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="ps-4 pt-4 pe-3 pb-4">
-                                <div class="">
-                                    <h6 class="mb-2 tx-12">Invoice Terbayar</h6>
-                                </div>
-                                <div class="pb-0 mt-0">
-                                    <div class="d-flex">
-                                        <h4 id="binv" class="tx-20 font-weight-semibold mb-2"></h4>
-                                    </div>
-                                </div>
+        </div><!-- col-6 -->
+    </div>
+    <!-- /row -->
+    <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
+            <div class="card sales-card circle-image1">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="ps-4 pt-4 pe-3 pb-4">
+                            <div class="">
+                                <h6 class="mb-2 tx-12 ">Jumlah Invoice</h6>
                             </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="circle-icon bg-primary-transparent text-center align-self-center overflow-hidden">
-                                <i class="fa fa-file-invoice tx-16 text-primary"></i>
+                            <div class="pb-0 mt-0">
+                                <div class="d-flex">
+                                    <h4 id="ainv" class="tx-20 font-weight-semibold mb-2"></h4>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
-                <div class="card sales-card circle-image2">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="ps-4 pt-4 pe-3 pb-4">
-                                <div class="">
-                                    <h6 class="mb-2 tx-12">Invoice Belum Dibayar</h6>
-                                </div>
-                                <div class="pb-0 mt-0">
-                                    <div class="d-flex">
-                                        <h4 id="cinv" class="tx-20 font-weight-semibold mb-2"></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="circle-icon bg-warning-transparent text-center align-self-center overflow-hidden">
-                                <i class="fa fa-file-invoice tx-16 text-warning"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
-                <div class="card sales-card circle-image2">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="ps-4 pt-4 pe-3 pb-4">
-                                <div class="">
-                                    <h6 class="mb-2 tx-12">Invoice Tidak Dibayar</h6>
-                                </div>
-                                <div class="pb-0 mt-0">
-                                    <div class="d-flex">
-                                        <h4 id="dinv" class="tx-20 font-weight-semibold mb-2"></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="circle-icon bg-secondary-transparent text-center align-self-center overflow-hidden">
-                                <i class="fa fa-file-invoice tx-16 text-secondary"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
-                <div class="card sales-card circle-image1">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="ps-4 pt-4 pe-3 pb-4">
-                                <div class="">
-                                    <h6 class="mb-2 tx-12 ">Total Invoice</h6>
-                                </div>
-                                <div class="pb-0 mt-0">
-                                    <div class="d-flex">
-                                        <h4 id="totalinv" class="tx-20 font-weight-semibold mb-2"></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="circle-icon bg-info-transparent text-center align-self-center overflow-hidden">
-                                <i class="fa fa-dollar-sign tx-16 text-info"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
-                <div class="card sales-card circle-image2">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="ps-4 pt-4 pe-3 pb-4">
-                                <div class="">
-                                    <h6 class="mb-2 tx-12">Invoice Terbayar</h6>
-                                </div>
-                                <div class="pb-0 mt-0">
-                                    <div class="d-flex">
-                                        <h4 id="terbinv" class="tx-20 font-weight-semibold mb-2"></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="circle-icon bg-primary-transparent text-center align-self-center overflow-hidden">
-                                <i class="fa fa-dollar-sign tx-16 text-primary"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
-                <div class="card sales-card circle-image2">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="ps-4 pt-4 pe-3 pb-4">
-                                <div class="">
-                                    <h6 class="mb-2 tx-12">Invoice Belum Dibayar</h6>
-                                </div>
-                                <div class="pb-0 mt-0">
-                                    <div class="d-flex">
-                                        <h4 id="belinv" class="tx-20 font-weight-semibold mb-2"></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="circle-icon bg-warning-transparent text-center align-self-center overflow-hidden">
-                                <i class="fa fa-dollar-sign tx-16 text-warning"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
-                <div class="card sales-card circle-image2">
-                    <div class="row">
-                        <div class="col-9">
-                            <div class="ps-4 pt-4 pe-3 pb-4">
-                                <div class="">
-                                    <h6 class="mb-2 tx-12">Invoice Tidak Dibayar</h6>
-                                </div>
-                                <div class="pb-0 mt-0">
-                                    <div class="d-flex">
-                                        <h4 id="batinv" class="tx-20 font-weight-semibold mb-2"></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-3">
-                            <div class="circle-icon bg-secondary-transparent text-center align-self-center overflow-hidden">
-                                <i class="fa fa-dollar-sign tx-16 text-secondary"></i>
-                            </div>
+                    <div class="col-3">
+                        <div class="circle-icon bg-info-transparent text-center align-self-center overflow-hidden">
+                            <i class="fa fa-file-invoice tx-16 text-info"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
+            <div class="card sales-card circle-image2">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="ps-4 pt-4 pe-3 pb-4">
+                            <div class="">
+                                <h6 class="mb-2 tx-12">Invoice Terbayar</h6>
+                            </div>
+                            <div class="pb-0 mt-0">
+                                <div class="d-flex">
+                                    <h4 id="binv" class="tx-20 font-weight-semibold mb-2"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="circle-icon bg-primary-transparent text-center align-self-center overflow-hidden">
+                            <i class="fa fa-file-invoice tx-16 text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
+            <div class="card sales-card circle-image2">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="ps-4 pt-4 pe-3 pb-4">
+                            <div class="">
+                                <h6 class="mb-2 tx-12">Invoice Belum Dibayar</h6>
+                            </div>
+                            <div class="pb-0 mt-0">
+                                <div class="d-flex">
+                                    <h4 id="cinv" class="tx-20 font-weight-semibold mb-2"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="circle-icon bg-warning-transparent text-center align-self-center overflow-hidden">
+                            <i class="fa fa-file-invoice tx-16 text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
+            <div class="card sales-card circle-image2">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="ps-4 pt-4 pe-3 pb-4">
+                            <div class="">
+                                <h6 class="mb-2 tx-12">Invoice Tidak Dibayar</h6>
+                            </div>
+                            <div class="pb-0 mt-0">
+                                <div class="d-flex">
+                                    <h4 id="dinv" class="tx-20 font-weight-semibold mb-2"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="circle-icon bg-secondary-transparent text-center align-self-center overflow-hidden">
+                            <i class="fa fa-file-invoice tx-16 text-secondary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
+            <div class="card sales-card circle-image1">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="ps-4 pt-4 pe-3 pb-4">
+                            <div class="">
+                                <h6 class="mb-2 tx-12 ">Total Invoice</h6>
+                            </div>
+                            <div class="pb-0 mt-0">
+                                <div class="d-flex">
+                                    <h4 id="totalinv" class="tx-20 font-weight-semibold mb-2"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="circle-icon bg-info-transparent text-center align-self-center overflow-hidden">
+                            <i class="fa fa-dollar-sign tx-16 text-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
+            <div class="card sales-card circle-image2">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="ps-4 pt-4 pe-3 pb-4">
+                            <div class="">
+                                <h6 class="mb-2 tx-12">Invoice Terbayar</h6>
+                            </div>
+                            <div class="pb-0 mt-0">
+                                <div class="d-flex">
+                                    <h4 id="terbinv" class="tx-20 font-weight-semibold mb-2"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="circle-icon bg-primary-transparent text-center align-self-center overflow-hidden">
+                            <i class="fa fa-dollar-sign tx-16 text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
+            <div class="card sales-card circle-image2">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="ps-4 pt-4 pe-3 pb-4">
+                            <div class="">
+                                <h6 class="mb-2 tx-12">Invoice Belum Dibayar</h6>
+                            </div>
+                            <div class="pb-0 mt-0">
+                                <div class="d-flex">
+                                    <h4 id="belinv" class="tx-20 font-weight-semibold mb-2"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="circle-icon bg-warning-transparent text-center align-self-center overflow-hidden">
+                            <i class="fa fa-dollar-sign tx-16 text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-12 col-xs-12">
+            <div class="card sales-card circle-image2">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="ps-4 pt-4 pe-3 pb-4">
+                            <div class="">
+                                <h6 class="mb-2 tx-12">Invoice Tidak Dibayar</h6>
+                            </div>
+                            <div class="pb-0 mt-0">
+                                <div class="d-flex">
+                                    <h4 id="batinv" class="tx-20 font-weight-semibold mb-2"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="circle-icon bg-secondary-transparent text-center align-self-center overflow-hidden">
+                            <i class="fa fa-dollar-sign tx-16 text-secondary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
 
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -352,7 +353,7 @@
                 let tahun = $('#tahun').val();
                 $.ajax({
                     type: "POST",
-                    url: "{{route('admin.exportfilter')}}",
+                    url: "{{route('keuangan.exportfilter')}}",
                     data: {
                         bulan: bulan,
                         tahun: tahun,
@@ -375,7 +376,7 @@
             $('#export2').click(function () {
                 $.ajax({
                     type: "POST",
-                    url: "{{route('admin.exportsemua')}}",
+                    url: "{{route('keuangan.exportsemua')}}",
                     xhrFields:{
                         responseType: 'blob'
                     },

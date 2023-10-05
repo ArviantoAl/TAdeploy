@@ -663,4 +663,6 @@ class DashboardController extends Controller
             'batas_max'=>$batas_max
         ]);
     }
+
+    
 }

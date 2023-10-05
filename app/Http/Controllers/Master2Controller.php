@@ -22,6 +22,11 @@ class Master2Controller extends Controller
 
         return view('dashboard.admin.lokasi.index', compact('lokasis'));
     }
+    public function teknisi_lokasi_index(){
+        $lokasis = MasterBts::query()->paginate(10);
+
+        return view('dashboard.teknisi.lokasi.index', compact('lokasis'));
+    }
 
     public function tambah_lokasi(){
         $lokasi = new MasterBts();
@@ -30,7 +35,67 @@ class Master2Controller extends Controller
         return view('dashboard.admin.lokasi.tambah_lokasi', compact('lokasi','provinsi'));
     }
 
+    public function teknisi_tambah_lokasi(){
+        $lokasi = new MasterBts();
+        $provinsi = Province::all();
+
+        return view('dashboard.teknisi.lokasi.tambah_lokasi', compact('lokasi','provinsi'));
+    }
+
     public function post_tambah_lokasi(Request $request){
+        $nama = $request->nama;
+        $provinsi_id = $request->provinsi;
+        $kabupaten_id = $request->kabupaten;
+        $kecamatan_id = $request->kecamatan;
+        $desa_id = $request->desa;
+        $koordinat = $request->koordinat;
+
+        if ($koordinat==null){
+            $long=null;
+            $lat=null;
+        }else{
+            $ll = explode(",",$koordinat);
+            $long = $ll[1];
+            $lat = $ll[0];
+        }
+
+        if ($provinsi_id==0){
+            return response()->json(['status'=>1, 'msg'=>'Data Provinsi Belum Dipilih!']);
+        }elseif ($kabupaten_id==0){
+            return response()->json(['status'=>2, 'msg'=>'Data Kabupaten Dipilih!']);
+        }elseif ($kecamatan_id==0){
+            return response()->json(['status'=>3, 'msg'=>'Data Kecamatan Dipilih!']);
+        }elseif ($desa_id==0){
+            return response()->json(['status'=>4, 'msg'=>'Data Desa Dipilih!']);
+        }else{
+            $lokasi = new MasterBts();
+            $lokasi->nama_master = $nama;
+            $lokasi->provinsi_id = $provinsi_id;
+            $lokasi->kabupaten_id = $kabupaten_id;
+            $lokasi->kecamatan_id = $kecamatan_id;
+            $lokasi->desa_id = $desa_id;
+            $lokasi->longitude = $long;
+            $lokasi->latitude = $lat;
+
+            $getprovinsi = Province::query()->find($provinsi_id);
+            $provinsi = $getprovinsi->name;
+
+            $getkabupaten = Regency::query()->find($kabupaten_id);
+            $kabupaten = $getkabupaten->name;
+
+            $getkecamatan = District::query()->find($kecamatan_id);
+            $kecamatan = $getkecamatan->name;
+
+            $getdesa = Village::query()->find($desa_id);
+            $desa = $getdesa->name;
+
+            $lengkap = array($desa,$kecamatan,$kabupaten,$provinsi);
+            $lokasi->nama_lokasi = implode(", ",$lengkap);
+            $lokasi->save();
+        }
+    }
+
+    public function teknisi_post_tambah_lokasi(Request $request){
         $nama = $request->nama;
         $provinsi_id = $request->provinsi;
         $kabupaten_id = $request->kabupaten;
@@ -87,10 +152,72 @@ class Master2Controller extends Controller
         $lokasi = MasterBts::find($id_lokasi);
         $provinsi =Province::all();
 
-        return view('dashboard.admin.lokasi.edit_lokasi', compact('lokasi','provinsi'));
+        return view('dashboard.teknisi.lokasi.edit_lokasi', compact('lokasi','provinsi'));
+    }
+
+    public function teknisi_edit_lokasi($id_lokasi){
+        $lokasi = MasterBts::find($id_lokasi);
+        $provinsi =Province::all();
+
+        return view('dashboard.teknisi.lokasi.edit_lokasi', compact('lokasi','provinsi'));
     }
 
     public function post_edit_lokasi(Request $request){
+        $nama = $request->nama;
+        $provinsi_id = $request->provinsi;
+        $kabupaten_id = $request->kabupaten;
+        $kecamatan_id = $request->kecamatan;
+        $desa_id = $request->desa;
+        $koordinat = $request->koordinat;
+
+        if ($koordinat==null){
+            $long=null;
+            $lat=null;
+        }else{
+            $ll = explode(",",$koordinat);
+            $long = $ll[1];
+            $lat = $ll[0];
+        }
+        $id_lokasi = $request->id_lokasi;
+
+        if ($provinsi_id==0){
+            return response()->json(['status'=>1, 'msg'=>'Data Provinsi Belum Dipilih!']);
+        }elseif ($kabupaten_id==0){
+            return response()->json(['status'=>2, 'msg'=>'Data Kabupaten Dipilih!']);
+        }elseif ($kecamatan_id==0){
+            return response()->json(['status'=>3, 'msg'=>'Data Kecamatan Dipilih!']);
+        }elseif ($desa_id==0){
+            return response()->json(['status'=>4, 'msg'=>'Data Desa Dipilih!']);
+        }else{
+            $lokasi = MasterBts::query()->find($id_lokasi);
+            $lokasi->nama_master = $nama;
+            $lokasi->provinsi_id = $provinsi_id;
+            $lokasi->kabupaten_id = $kabupaten_id;
+            $lokasi->kecamatan_id = $kecamatan_id;
+            $lokasi->desa_id = $desa_id;
+            $lokasi->longitude = $long;
+            $lokasi->latitude = $lat;
+
+            $getprovinsi = Province::query()->find($provinsi_id);
+            $provinsi = $getprovinsi->name;
+
+            $getkabupaten = Regency::query()->find($kabupaten_id);
+            $kabupaten = $getkabupaten->name;
+
+            $getkecamatan = District::query()->find($kecamatan_id);
+            $kecamatan = $getkecamatan->name;
+
+            $getdesa = Village::query()->find($desa_id);
+            $desa = $getdesa->name;
+
+            $lengkap = array($desa,$kecamatan,$kabupaten,$provinsi);
+            $lokasi->nama_lokasi = implode(", ",$lengkap);
+            $lokasi->save();
+
+        }
+    }
+
+    public function teknisi_post_edit_lokasi(Request $request){
         $nama = $request->nama;
         $provinsi_id = $request->provinsi;
         $kabupaten_id = $request->kabupaten;

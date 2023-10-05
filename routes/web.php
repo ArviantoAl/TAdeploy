@@ -86,6 +86,7 @@ Route::group(['prefix'=>'admin','middleware'=>['userRole','auth']],function (){
 //    Kelola User
    Route::get('data_user', [UserController::class, 'data_user'])->name('admin.user');
     Route::get('data_pelanggan_aktif', [UserController::class, 'pelanggan_aktif'])->name('admin.pelangganaktif');
+    // Route::get('data_pelanggan_aktif/filter', [UserController::class, 'pelanggan_aktif_filter'])->name('admin.pelangganaktif');
     Route::get('detail_pelanggan', [UserController::class, 'detail_pelanggan'])->name('admin.detailpelanggan');
     Route::get('change_ppn', [UserController::class, 'change_ppn'])->name('admin.changeppn');
     Route::get('selectallppn', [UserController::class, 'selectallppn'])->name('admin.selectallppn');
@@ -205,6 +206,12 @@ Route::group(['prefix'=>'teknisi','middleware'=>['userRole','auth']],function ()
     Route::put('user/{user_id}/update', [UserController::class, 'post_teknisi_edit_user']);
     Route::get('user/{user_id}/delete', [UserController::class, 'destroy']);
     Route::get('tambahuser', [UserController::class, 'teknisi_tambah_user'])->name('teknisi.tambahuser');
+    // kelola master lokasi
+    Route::get('data_lokasi', [Master2Controller::class, 'teknisi_lokasi_index'])->name('teknisi.lokasi');
+    Route::get('tambahlokasi', [Master2Controller::class, 'teknisi_tambah_lokasi'])->name('teknisi.tambahlokasi');
+    Route::post('postlokasi', [Master2Controller::class, 'teknisi_post_tambah_lokasi'])->name('teknisi.postlokasi');
+    Route::get('{id_lokasi}/editlokasi', [Master2Controller::class, 'teknisi_edit_lokasi'])->name('teknisi.editlokasi');
+    Route::post('posteditlokasi', [Master2Controller::class, 'teknisi_post_edit_lokasi'])->name('teknisi.posteditlokasi');
     // kelola Master Mikrotik
     Route::get('data_mastermikrotik', [Master2Controller::class, 'mastermikrotik_index'])->name('teknisi.mastermikrotik');
     Route::get('tambahmastermikrotik', [Master2Controller::class, 'tambah_master_mikrotik'])->name('teknisi.tambahmastermikrotik');
@@ -212,18 +219,33 @@ Route::group(['prefix'=>'teknisi','middleware'=>['userRole','auth']],function ()
     Route::get('{id_mastermikrotik}/edit_mastermikrotik', [Master2Controller::class, 'edit_mastermikrotik'])->name('teknisi.editmastermikrotik');
     Route::put('posteditmastermikrotik/{id_master}', [Master2Controller::class, 'post_edit_mastermikrotik'])->name('teknisi.posteditmastermikrotik');
     // pelanggan aktif
+    Route::get('data_langganan', [LanggananController::class, 'teknisi_langganan_index'])->name('teknisi.langganan');
     Route::get('data_pelanggan_aktif', [UserController::class, 'teknisi_pelanggan_aktif'])->name('teknisi.pelangganaktif');
+    Route::get('change_ppn', [UserController::class, 'change_ppn'])->name('teknisi.changeppn');
+    Route::get('selectallppn', [UserController::class, 'teknisi_selectallppn'])->name('teknisi.selectallppn');
+    Route::get('printpel/{id_user}', [UserController::class, 'teknisi_export'])->name('teknisi.printpel');
+    // Route::get('{id_user}/tambah', [PemesananController::class, 'teknisi_form_lama'])->name('teknisi.form_lama');
+    // Route::get('{id_user}/edituser', [UserController::class, 'edit_user'])->name('teknisi.edituser');
+    Route::get('{id_pelanggan}/nonaktif_pelanggan', [UserController::class, 'teknisi_nonaktif_pelanggan'])->name('teknisi.nonaktif_pelanggan');
+    Route::get('setujui/{id_user}', [PemesananController::class, 'setujui_pesan'])->name('tekinsi.approvepelanggan');
+    // Route::post('postsetujui', [PemesananController::class, 'post_setujui_pesan'])->name('tekinsi.postapprove');
+    // Route::get('tolak/{id_langganan}', [PemesananController::class, 'tolak_langganan'])->name('tekinsi.rejectlangganan');
+    Route::post('kirim_semua', [InvoiceController::class, 'teknisi_kirim_balik'])->name('teknisi.kirimsemua');
     
     // kelola master bts
     Route::get('data_bts', [Master2Controller::class, 'teknisi_bts_index'])->name('teknisi.bts');
     Route::get('tambahbts', [Master2Controller::class, 'teknisi_tambah_bts'])->name('teknisi.tambahbts');
-    Route::post('postbts', [Master2Controller::class, 'teknisi_post_tambah_bts'])->name('teknisi.postbts');
+    Route::get('posttambahbts', [Master2Controller::class, 'teknisi_post_tambah_bts'])->name('teknisi.posttambahbts');
     Route::get('{id_bts}/editbts', [Master2Controller::class, 'teknisi_edit_bts'])->name('teknisi.editbts');
+    Route::put('posteditbts/{id_bts}', [Master2Controller::class, 'teknisi_post_edit_bts'])->name('teknisi.posteditbts');
     Route::put('posteditbts/{id_bts}', [Master2Controller::class, 'teknisi_post_edit_bts'])->name('teknisi.posteditbts');
     Route::get('nonaktif_bts/{id_bts}', [Master2Controller::class, 'teknisi_nonaktif_bts'])->name('teknisi.nonaktifbts');
     Route::get('aktif_bts/{id_bts}', [Master2Controller::class, 'teknisi_aktif_bts'])->name('teknisi.aktifbts');
     Route::get('getloginbts', [TestingController::class, 'loginwb'])->name('teknisi.getloginbts');
     Route::post('postloginbts', [TestingController::class, 'submitlogin'])->name('teknisi.postloginbts');
+    Route::get('{id_bts}/editloginbts', [TestingController::class, 'logineditmk'])->name('teknisi.geteditloginbts');
+    Route::post('editloginbts/{id_bts}', [TestingController::class, 'submitloginedit'])->name('teknisi.editloginbts');
+    Route::post('posteditloginbts/{id_bts}', [TestingController::class, 'teknisi_post_edit_mikrotik_bts'])->name('teknisi.posteditloginbts');
     Route::get('testing', [TestingController::class, 'index'])->name('teknisi.testing');
 
 // kelola langganan
@@ -260,7 +282,18 @@ Route::group(['prefix'=>'keuangan','middleware'=>['userRole','auth']],function (
     Route::get('logActivity', [HomeController::class,'keuangan_logActivity'])->name('keuangan.actlog');
     //kelola profilcv
     // pelanggan aktif
+    Route::get('data_langganan', [LanggananController::class, 'keuangan_langganan_index'])->name('keuangan.langganan');
     Route::get('data_pelanggan_aktif', [UserController::class, 'keuangan_pelanggan_aktif'])->name('keuangan.pelangganaktif');
+    // Route::get('{id_user}/tambah', [PemesananController::class, 'keuangan_form_lama'])->name('keuangan.form_lama');
+    Route::get('{id_user}/edituser', [UserController::class, 'keuangan_edit_user'])->name('keuangan.edituser');
+    Route::put('postedituser/{id_user}', [UserController::class, 'keuangan_post_edit_user'])->name('keuangan.postedituser');
+    Route::get('{id_pelanggan}/nonaktif_pelanggan', [UserController::class, 'keuangan_nonaktif_pelanggan'])->name('keuangan.nonaktif_pelanggan');
+    Route::get('printpel/{id_user}', [UserController::class, 'keuangan_export'])->name('keuangan.printpel');
+    Route::get('change_ppn', [UserController::class, 'keuangan_change_ppn'])->name('keuangan.changeppn');
+    Route::get('selectallppn', [UserController::class, 'keuangan_selectallppn'])->name('keuangan.selectallppn');
+    // Route::get('edit_langganan/{id_langganan}', [PemesananController::class, 'edit_langganan'])->name('keuangan.edit_langganan');
+    Route::post('kirim_semua', [InvoiceController::class, 'keuangan_kirim_balik'])->name('keuangan.kirimsemua');
+    
     // Invoice keuangan
     Route::get('data_invoice', [InvoiceController::class, 'data_invoice'])->name('keuangan.invoice');
     Route::get('invoice_belum_kirim', [InvoiceController::class, 'invoice_belumkirim'])->name('keuangan.inv_belumkirim');
@@ -284,9 +317,9 @@ Route::group(['prefix'=>'keuangan','middleware'=>['userRole','auth']],function (
     Route::get('data_invoice', [InvoiceController::class, 'data_invoice'])->name('keuangan.invoice');
     Route::post('export2', [InvoiceController::class, 'export'])->name('keuangan.export2');
     Route::post('kirim_semua', [InvoiceController::class, 'kirim_balik'])->name('keuangan.kirimsemua');
-    Route::post('setujui_manual/{id_invoice}', [InvoiceController::class, 'setujui_manual'])->name('keuangan.setujuimanual');
-    Route::get('setujui_pembayaran/{id_invoice}', [InvoiceController::class, 'setujui_pembayaran'])->name('keuangan.approvepembayaran');
-    Route::get('tolak_pembayaran/{id_invoice}', [InvoiceController::class, 'tolak_pembayaran'])->name('keuangan.tolakpembayaran');
+    Route::post('setujui_manual/{id_invoice}', [InvoiceController::class, 'keuangan_setujui_manual'])->name('keuangan.setujuimanual');
+    Route::get('setujui_pembayaran/{id_invoice}', [InvoiceController::class, 'keuangan_setujui_pembayaran'])->name('keuangan.approvepembayaran');
+    Route::get('tolak_pembayaran/{id_invoice}', [InvoiceController::class, 'keuangan_tolak_pembayaran'])->name('keuangan.tolakpembayaran');
     Route::get('setujui_klaim/{id_inv}', [InvoiceController::class, 'approve_klaim'])->name('keuangan.approveklaim');
     Route::get('print/{id_invoice}', [InvoiceController::class, 'print_invoice'])->name('keuangan.printinv');
 });

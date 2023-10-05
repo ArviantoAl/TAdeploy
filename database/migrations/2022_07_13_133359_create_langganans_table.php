@@ -43,6 +43,7 @@ return new class extends Migration
             $table->foreign('turunan_id')->references('id_turunan')->on('turunan_bts');
             $table->string('ip')->nullable();
             $table->string('ip_radio')->nullable();
+            $table->string('reason')->references('id_reason')->on('reason');
             $table->timestamps();
         });
     }

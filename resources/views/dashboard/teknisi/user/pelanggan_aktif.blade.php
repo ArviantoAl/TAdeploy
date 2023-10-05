@@ -21,7 +21,7 @@
     <div class="row row-sm">
         <div class="col-lg-12">
             @if($terakhir == $bulan)
-                <form action="{{ route('admin.kirimsemua') }}" method="POST">
+                <form action="{{ route('teknisi.kirimsemua') }}" method="POST">
                     @csrf
                     <div class="row row-xs">
                         <div class="col-md-4">
@@ -39,7 +39,7 @@
                 </form>
             @endif
 
-            <form action="{{ route('admin.pelangganaktif') }}" method="GET">
+            <form action="{{ route('teknisi.pelangganaktif') }}" method="GET">
                 <div class="row row-xs">
                     <div class="form-group col-md-2">
                         <select name="status" id="status" class="form-control form-select select2" data-placeholder="Filter status">
@@ -103,54 +103,54 @@
                                                 <span class="badge badge-pill bg-primary me-1">{{ $user->status->nama_status }}</span>
                                             </h5>
                                         </td>
-                                        <td>
-                                            <a class="btn btn-success" href="{{ route('admin.approvepelanggan', $user->id_user) }}" data-toggle="tooltip" title="Approve">
+                                        {{-- <td>
+                                            <a class="btn btn-success" href="{{ route('teknisi.approvepelanggan', $user->id_user) }}" data-toggle="tooltip" title="Approve">
                                                 <i class="fa fa-check"></i>
                                             </a>
-                                        </td>
+                                        </td> --}}
                                     @elseif($user->status_id == 2)
                                         <td>
                                             <h5>
                                                 <span class="badge badge-pill bg-warning me-1">{{ $user->status->nama_status }}</span>
                                             </h5>
                                         </td>
-                                        <td>
-                                            <a class="btn btn-warning" href="{{ route('admin.form_lama', $user->id_user) }}" data-toggle="tooltip" title="Tambah Langganan">
+                                        {{-- <td>
+                                            <a class="btn btn-warning" href="{{ route('teknisi.form_lama', $user->id_user) }}" data-toggle="tooltip" title="Tambah Langganan">
                                                 <i class="fa fa-plus"></i>
                                             </a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-warning" href="{{ route('admin.edituser', $user->id_user) }}" data-toggle="tooltip" title="Edit">
+                                        </td> --}}
+                                        {{-- <td>
+                                            <a class="btn btn-warning" href="{{ route('teknisi.edituser', $user->id_user) }}" data-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                        </td>
+                                        </td> --}}
                                     @elseif($user->status_id == 3)
                                         <td>
                                             <h5>
                                                 <span class="badge badge-pill bg-success me-1">{{ $user->status->nama_status }}</span>
                                             </h5>
-                                        </td>
+                                        </td>{{-- 
                                         <td>
-                                            <a class="btn btn-warning" href="{{ route('admin.form_lama', $user->id_user) }}" data-toggle="tooltip" title="Tambah Langganan">
+                                            <a class="btn btn-warning" href="{{ route('teknisi.form_lama', $user->id_user) }}" data-toggle="tooltip" title="Tambah Langganan">
                                                 <i class="fa fa-plus"></i>
                                             </a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-warning" href="{{ route('admin.edituser', $user->id_user) }}" data-toggle="tooltip" title="Edit">
+                                        </td> --}}
+                                        {{-- <td>
+                                            <a class="btn btn-warning" href="{{ route('teknisi.edituser', $user->id_user) }}" data-toggle="tooltip" title="Edit">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-danger" href="{{ route('admin.nonaktif_pelanggan', $user->id_user) }}" data-toggle="tooltip" title="Nonaktif Pelanggan">
+                                        </td> 
+                                         <td>
+                                            <a class="btn btn-danger" href="{{ route('teknisi.nonaktif_pelanggan', $user->id_user) }}" data-toggle="tooltip" title="Nonaktif Pelanggan">
                                                 <i class="fa fa-ban"></i>
                                             </a>
-                                        </td>
+                                        </td> --}}
                                     @elseif($user->status_id == 4)
                                         <td>
                                             <h5>
                                                 <span class="badge badge-pill bg-danger me-1">{{ $user->status->nama_status }}</span>
                                             </h5>
-                                        </td>)
+                                        </td>S
                                     @endif
                                     <td>
                                         <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal{{$user->id_user}}" data-toggle="tooltip" title="Lihat Langganan Pelanggan">
@@ -158,7 +158,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a class="btn btn-success" href="{{ route('admin.printpel', $user->id_user) }}" data-toggle="tooltip" title="Cetak">
+                                        <a class="btn btn-success" href="{{ route('teknisi.printpel', $user->id_user) }}" data-toggle="tooltip" title="Cetak">
                                             <i class="fa fa-print"></i>
                                         </a>
                                     </td>
@@ -185,7 +185,7 @@
             // console.log(user_id);
             $.ajax({
                 type: "GET",
-                url: "{{route('admin.changeppn')}}",
+                url: "{{route('teknisi.changeppn')}}",
                 data: {
                     id_user: user_id,
                     ppn_id: ppn_id,
@@ -208,7 +208,7 @@
             var ppn_flag = $(this).prop('checked') === true ? 1 : 0;
             $.ajax({
                 type: "GET",
-                url: "{{route('admin.selectallppn')}}",
+                url: "{{route('teknisi.selectallppn')}}",
                 data: {
                     ppn_flag: ppn_flag,
                 },
@@ -261,7 +261,7 @@
                                         <td>{{ $no+1 }}</td>
                                         <td>{{ $langganan->alamat_pasang }}</td>
                                         <td>{{ $langganan->layanan->nama_layanan }}</td>
-                                        <td>{{ exec("ping -n 5 $ip", $output); }}</td>
+                                        <td >{{ exec("ping -n 1 " . $langganan->ip, $output, $result);}} </td>
                                         <td>{{ $langganan->IP }}</td>
                                         <td>{{ $langganan->tgl_lanjut }}</td>
                                         @if($langganan->status_id == 1)
@@ -283,12 +283,12 @@
                                                 </h5>
                                             </td>
                                             <td>
-                                                <a class="btn btn-warning" href="{{ route('admin.edit_langganan', $langganan->id_langganan) }}" data-toggle="tooltip" title="Edit Langganan">
+                                                {{-- <a class="btn btn-warning" href="{{ route('teknisi.edit_langganan', $langganan->id_langganan) }}" data-toggle="tooltip" title="Edit Langganan">
                                                     <i class="fa fa-edit"></i>
                                                 </a>
-                                                <a class="btn btn-danger" href="{{ route('admin.nonaktif_langganan', $langganan->id_langganan) }}" data-toggle="tooltip" title="Nonaktif Langganan">
+                                                <a class="btn btn-danger" href="{{ route('teknisi.nonaktif_langganan', $langganan->id_langganan) }}" data-toggle="tooltip" title="Nonaktif Langganan">
                                                     <i class="fa fa-ban"></i>
-                                                </a>
+                                                </a> --}}
                                             </td>
                                         @elseif($langganan->status_id == 4 || $langganan->status_id == 5)
                                             <td>
@@ -307,9 +307,7 @@
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" value="Reload Page" onClick="reload" >Ping!</button>
+                        <button type="button" class="btn btn-danger" value="Reload Page" onClick='window.location.reload();' >Ping!</button>
                     </div>
 
                 </div>

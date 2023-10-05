@@ -21,9 +21,15 @@
         <div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
             <div class="card">
                 <div class="card-body">
-                    <div>
+                    {{-- <div>
                         <h6>Hai {{Auth::user()->name}}, selamat datang kembali.</h6>
-                    </div>
+                        @if ($langganan->status_id = 4)
+                            <h6>Mohon maaf langganan anda kami nonaktifkan sementara.</h6>
+                            <h6>Untuk kembali menikmati layanan kami, segera selesaikan pembayaran</h6>
+                        @else
+                            <h6>Terimakasih sudah menyelesaikan pembayaran, Selamat menikmati layanan dari kami.</h6>
+                        @endif
+                    </div> --}}
                 </div>
             </div>
         </div>
