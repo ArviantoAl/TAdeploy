@@ -158,7 +158,7 @@
                                             <h5>
                                                 <span class="badge badge-pill bg-danger me-1">{{ $user->status->nama_status }}</span>
                                             </h5>
-                                        </td>)
+                                        </td>
                                     @endif
                                     <td>
                                         <a class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#myModal{{$user->id_user}}" data-toggle="tooltip" title="Lihat Langganan Pelanggan">
@@ -270,7 +270,7 @@
                                         <td>{{ $langganan->alamat_pasang }}</td>
                                         <td>{{ $langganan->layanan->nama_layanan }}</td>
                                         <td>{{ $langganan->ip }}</td>
-                                        <td>{{ exec("ping -n 1 $langganan->ip", $output, $result); }}</td>
+                                        <td>{{ $ping = exec("ping -n 1 $langganan->ip", $output, $result); }}</td>
                                         <td>{{ $langganan->tgl_lanjut }}</td>
                                         @if($langganan->status_id == 1)
                                             <td>

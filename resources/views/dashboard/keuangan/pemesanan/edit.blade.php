@@ -24,7 +24,7 @@
                 <p class="mb-2">Isi data untuk mengganti data langganan.</p>
             </div>
             <div class="card-body pt-0">
-                <form method="POST" id="form" action="{{ route('admin.postedit_langganan') }}">
+                <form method="POST" id="form" action="{{ route('keuangan.postedit_langganan') }}">
                     @csrf
                     {{--                    <div class="">--}}
                     <input type="hidden" id="id_lang" value="{{$get_lang->id_langganan}}">
@@ -340,7 +340,7 @@
                     // console.log(email);
                     $.ajax({
                         type: "POST",
-                        url: "{{ route('admin.postedit_langganan') }}",
+                        url: "{{ route('keuangan.postedit_langganan') }}",
                         data: {
                             id: id,
                             id_layanan: id_layanan,
@@ -360,7 +360,7 @@
                         cache: false,
                         success: function (data) {
                             console.log('success: ' + data);
-                            window.location.href = "{{route('admin.pelangganaktif')}}";
+                            window.location.href = "{{route('keuangan.pelangganaktif')}}";
                         },
                         error: function (data) {
                             var errors = data.responseJSON;

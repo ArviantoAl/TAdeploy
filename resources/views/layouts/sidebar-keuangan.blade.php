@@ -44,6 +44,27 @@
     </a>
 </li>
 </li>
+{{--Pemesanan--}}
+<li class="side-item side-item-category">Langganan dan Pemesanan</li>
+                {{--                langganan--}}
+{{--                <li class="slide{{ ($titlePage == 'Daftar langganan') ? ' is-expanded' : '' }}">--}}
+{{--                    <a class="side-menu__item{{ ($titlePage == 'Daftar langganan') ? ' active' : '' }}" href="{{ route('admin.langganan') }}" data-bs-toggle="slide">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">--}}
+{{--                            <path d="M11.86,2L11.34,3.93C15.75,4.78 19.2,8.23 20.05,12.65L22,12.13C20.95,7.03 16.96,3.04 11.86,2M10.82,5.86L10.3,7.81C13.34,8.27 15.72,10.65 16.18,13.68L18.12,13.16C17.46,9.44 14.55,6.5 10.82,5.86M3.72,9.69C3.25,10.73 3,11.86 3,13C3,14.95 3.71,16.82 5,18.28V22H8V20.41C8.95,20.8 9.97,21 11,21C12.14,21 13.27,20.75 14.3,20.28L3.72,9.69M9.79,9.76L9.26,11.72A3,3 0 0,1 12.26,14.72L14.23,14.2C14,11.86 12.13,10 9.79,9.76Z"/>--}}
+{{--                        </svg>--}}
+{{--                        <span class="side-menu__label">Daftar Langganan</span>--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+                {{--                pemesanan--}}
+                <li class="slide{{ ($titlePage == 'Form Pemesanan') ? ' is-expanded' : '' }}">
+                    <a class="side-menu__item{{ ($titlePage == 'Form Pemesanan') ? ' active' : '' }}" href="{{ route('keuangan.form_pemesanan') }}" data-bs-toggle="slide">
+                        <svg xmlns="http://www.w3.org/2000/svg"  class="side-menu__icon" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M21.04 13.13C21.18 13.13 21.31 13.19 21.42 13.3L22.7 14.58C22.92 14.79 22.92 15.14 22.7 15.35L21.7 16.35L19.65 14.3L20.65 13.3C20.76 13.19 20.9 13.13 21.04 13.13M19.07 14.88L21.12 16.93L15.06 23H13V20.94L19.07 14.88M3 7V5H5V4C5 2.89 5.9 2 7 2H13V9L15.5 7.5L18 9V2H19C20.05 2 21 2.95 21 4V10L11 20V22H7C5.95 22 5 21.05 5 20V19H3V17H5V13H3V11H5V7H3M5 7H7V5H5V7M5 11V13H7V11H5M5 17V19H7V17H5Z"/>
+                        </svg>
+                        <span class="side-menu__label">Form Pemesanan</span>
+                    </a>
+                </li>
+
 {{--Pelanggan--}}
 <li class="slide{{ $titlePage == 'Daftar Pelanggan Aktif' ? ' is-expanded' : '' }}">
     <a class="side-menu__item{{ $titlePage == 'Daftar Pelanggan Aktif' ? ' active' : '' }}" href="{{route('keuangan.pelangganaktif')}}">

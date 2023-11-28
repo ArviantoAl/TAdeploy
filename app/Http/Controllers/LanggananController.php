@@ -100,4 +100,5 @@ class LanggananController extends Controller
 
         return view('dashboard.keuangan.langganan', compact('langganans'));
     }
+    
 }

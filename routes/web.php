@@ -293,6 +293,13 @@ Route::group(['prefix'=>'keuangan','middleware'=>['userRole','auth']],function (
     Route::get('selectallppn', [UserController::class, 'keuangan_selectallppn'])->name('keuangan.selectallppn');
     // Route::get('edit_langganan/{id_langganan}', [PemesananController::class, 'edit_langganan'])->name('keuangan.edit_langganan');
     Route::post('kirim_semua', [InvoiceController::class, 'keuangan_kirim_balik'])->name('keuangan.kirimsemua');
+    //pemesanan
+    Route::get('pemesanan', [PemesananController::class, 'keuangan_pemesanan'])->name('keuangan.form_pemesanan');
+    Route::post('postpemesanan', [PemesananController::class, 'pelanggan_lama'])->name('keuangan_pelanggan_lama');
+    Route::post('postpemesanan2', [PemesananController::class, 'keuangan_pelanggan_baru'])->name('keuangan_pelanggan_baru');
+    Route::post('postpemesanan3', [PemesananController::class, 'keuangan_pelanggan_onprogress'])->name('keuangan_pelanggan_onprogress');
+    Route::get('setujui/{id_user}', [PemesananController::class, 'keuangan_setujui_pesan'])->name('keuangan.approvepelanggan');
+    Route::post('postsetujui', [PemesananController::class, 'keuangan_post_setujui_pesan'])->name('keuangan.postapprove');
     
     // Invoice keuangan
     Route::get('data_invoice', [InvoiceController::class, 'data_invoice'])->name('keuangan.invoice');

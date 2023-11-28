@@ -24,7 +24,7 @@
                 <p class="mb-2">Isi data untuk melengkapi data langganan.</p>
             </div>
             <div class="card-body pt-0">
-                <form id="form" action="{{ route('admin.postapprove') }}">
+                <form id="form" action="{{ route('keuangan.postapprove') }}">
                     <div class="form-group">
                         <label for="user" class="form-label">Nama Pelanggan</label>
                         <input class="form-control" value="{{$user->name}}" type="text" disabled>

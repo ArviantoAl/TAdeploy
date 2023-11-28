@@ -46,7 +46,7 @@
                                 <div class="tab-content">
 {{--                                    pelanggan baru--}}
                                     <div class="tab-pane active" id="tab6">
-                                        <form id="form2" action="{{ route('pelanggan_baru') }}">
+                                        <form id="form2" action="{{ route('keuangan_pelanggan_baru') }}">
                                             <div class="form-group">
                                                 <label for="name" class="form-label">Nama</label>
                                                 <input class="form-control" id="name" name="name" placeholder="Masukkan Nama Lengkap" type="text" required autocomplete="name" autofocus>
@@ -170,7 +170,7 @@
 
 {{--                                    pelanggan on progress--}}
                                     <div class="tab-pane" id="tab7">
-                                        <form id="form3" method="POST" action="{{ route('pelanggan_onprogress') }}">
+                                        <form id="form3" method="POST" action="{{ route('keuangan_pelanggan_onprogress') }}">
                                             @csrf
                                             <div class="form-group">
                                                 <label for="name3" class="form-label">Nama</label>
@@ -361,7 +361,7 @@
                                 alert(data.msg);
                             }else {
                                 console.log('success: ' + data);
-                                window.location.href = "{{route('admin.pelangganaktif','status=2')}}";
+                                window.location.href = "{{route('keuangan.pelangganaktif','status=2')}}";
                             }
                         },
                         error: function (data) {

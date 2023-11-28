@@ -24,7 +24,7 @@
                 <p class="mb-2">Isi data form berikut untuk menambahkan Langganan {{$user->name}}.</p>
             </div>
             <div class="card-body pt-0">
-                <form id="form1" action="{{ route('pelanggan_lama') }}">
+                <form id="form1" action="{{ route('keuangan_pelanggan_lama') }}">
                     <div class="form-group">
                         <label for="user" class="form-label">Nama Pelanggan</label>
                         <input class="form-control" value="{{$user->name}}" type="text" disabled>
@@ -290,7 +290,7 @@
                                 alert(data.msg);
                             }else {
                                 console.log('success: ' + data);
-                                var url = "{{ route('admin.pelangganaktif', ":id") }}";
+                                var url = "{{ route('keuangan.pelangganaktif', ":id") }}";
                                 url = url.replace(':id', data);
                                 window.location.href = url;
                             }

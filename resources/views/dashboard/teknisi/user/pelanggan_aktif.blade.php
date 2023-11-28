@@ -261,8 +261,8 @@
                                         <td>{{ $no+1 }}</td>
                                         <td>{{ $langganan->alamat_pasang }}</td>
                                         <td>{{ $langganan->layanan->nama_layanan }}</td>
-                                        <td >{{ exec("ping -n 1 " . $langganan->ip, $output, $result);}} </td>
                                         <td>{{ $langganan->IP }}</td>
+                                        <td >{{ exec("ping -n 1 " . $langganan->ip, $output, $result);}} </td>
                                         <td>{{ $langganan->tgl_lanjut }}</td>
                                         @if($langganan->status_id == 1)
                                             <td>
